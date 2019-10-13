@@ -118,11 +118,13 @@ LoRa E32 TTL 100 Arduino fully connected
 
 I made a set of quite numerous constructors, because we can have more options and situations to manage.
 
-`LoRa_E32(byte rxPin, byte txPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);`
+```cpp
+LoRa_E32(byte rxPin, byte txPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
 
-`LoRa_E32(byte rxPin, byte txPin, byte auxPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);`
+LoRa_E32(byte rxPin, byte txPin, byte auxPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
 
-`LoRa_E32(byte rxPin, byte txPin, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);`
+LoRa_E32(byte rxPin, byte txPin, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
+```
 
 First set of constructor are create to delegate the manage of Serial and other pins to the library.
 
@@ -134,7 +136,7 @@ First set of constructor are create to delegate the manage of Serial and other p
 
 A simple example is
 
-```
+```cpp
 #include "LoRa_E32.h"
 LoRa_E32 e32ttl100(2, 3); // RX, TX
 // LoRa_E32 e32ttl100(2, 3, 5, 6, 7); // RX, TX
@@ -142,43 +144,56 @@ LoRa_E32 e32ttl100(2, 3); // RX, TX
 
 We can use directly a SoftwareSerial with another constructor
 
-`LoRa_E32(HardwareSerial* serial, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);`
-`LoRa_E32(HardwareSerial* serial, byte auxPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);`
-`LoRa_E32(HardwareSerial* serial, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);`
+```cpp
+LoRa_E32(HardwareSerial* serial, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
+LoRa_E32(HardwareSerial* serial, byte auxPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
+LoRa_E32(HardwareSerial* serial, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
+```
 
 The example upper with this constructor can be do like so.
 
-`#include <SoftwareSerial.h>`
-`#include "LoRa_E32.h"`
-`SoftwareSerial mySerial(2, 3);` `// RX, TX`
-`LoRa_E32 e32ttl100(&amp;mySerial);`
-`// LoRa_E32 e32ttl100(&amp;mySerial, 5, 7, 6);`
+```cpp
+#include <SoftwareSerial.h>
+#include "LoRa_E32.h"
+SoftwareSerial mySerial(2, 3); // RX, TX
+LoRa_E32 e32ttl100(mySerial);
+// LoRa_E32 e32ttl100(&amp;mySerial, 5, 7, 6);
+```
 
 The last set of constructor is to permit to use an HardwareSerial instead of SoftwareSerial.
 
-`LoRa_E32(SoftwareSerial* serial, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);`
-`LoRa_E32(SoftwareSerial* serial, byte auxPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);`
-`LoRa_E32(SoftwareSerial* serial, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);`
+```cpp
+LoRa_E32(SoftwareSerial* serial, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
+LoRa_E32(SoftwareSerial* serial, byte auxPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
+LoRa_E32(SoftwareSerial* serial, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
+```
 
 ## Begin
 
 The begin command is used to startup Serial and pins in input and output mode.
 
-`void` `begin();`
+```cpp
+void begin();
+```
 
 in execution is
 
-`// Startup all pins and UART`
-`e32ttl100.begin();`
+```cpp
+// Startup all pins and UART
+e32ttl100.begin();
+```
 
 ### Configuration and information method
 
 There a set of methods for manage configuration and get information of the device.
-`ResponseStructContainer getConfiguration();`
-`ResponseStatus setConfiguration(Configuration configuration, PROGRAM_COMMAND saveType = WRITE_CFG_PWR_DWN_LOSE);`
-`ResponseStructContainer getModuleInformation();`
-`void` `printParameters(``struct` `Configuration configuration);`
-`ResponseStatus resetModule();`
+
+```cpp
+ResponseStructContainer getConfiguration();
+ResponseStatus setConfiguration(Configuration configuration, PROGRAM_COMMAND saveType = WRITE_CFG_PWR_DWN_LOSE);
+ResponseStructContainer getModuleInformation();
+void printParameters(struct Configuration configuration);
+ResponseStatus resetModule();
+```
 
 #### Response container
 
@@ -188,21 +203,26 @@ To simplify the manage of response I create a set of container, for me very usef
 
 This is a status container and have 2 simple entry point, with this you can get the status code and the description of status code
 
-`Serial.println(c.getResponseDescription());` `// Description of code`
-`Serial.println(c.code);` `// 1 if Success`
+```cpp
+Serial.println(c.getResponseDescription()); // Description of code
+Serial.println(c.code); // 1 if Success
+```
 
 The code are
-`SUCCESS = 1,`
-`ERR_UNKNOWN,`
-`ERR_NOT_SUPPORT,`
-`ERR_NOT_IMPLEMENT,`
-`ERR_NOT_INITIAL,`
-`ERR_INVALID_PARAM,`
-`ERR_DATA_SIZE_NOT_MATCH,`
-`ERR_BUF_TOO_SMALL,`
-`ERR_TIMEOUT,`
-`ERR_HARDWARE,`
-`ERR_HEAD_NOT_RECOGNIZED`
+
+```cpp
+SUCCESS = 1,
+ERR_UNKNOWN,
+ERR_NOT_SUPPORT,
+ERR_NOT_IMPLEMENT,
+ERR_NOT_INITIAL,
+ERR_INVALID_PARAM,
+ERR_DATA_SIZE_NOT_MATCH,
+ERR_BUF_TOO_SMALL,
+ERR_TIMEOUT,
+ERR_HARDWARE,
+ERR_HEAD_NOT_RECOGNIZED
+```
 
 ##### ResponseContainer
 
@@ -210,93 +230,110 @@ This container is created to manage String response and have 2 entry point.
 
 `data` with the string returned from message and  `status` an instance of  `RepsonseStatus`.
 
-`ResponseContainer rs = e32ttl.receiveMessage();`
-`String message = rs.data;`
-`Serial.println(rs.status.getResponseDescription());`
-`Serial.println(message);`
+```cpp
+ResponseContainer rs = e32ttl.receiveMessage();
+String message = rs.data;
+Serial.println(rs.status.getResponseDescription());
+Serial.println(message);
+```
 
 ##### ResponseStructContainer
 
 This is the more “complex” container, I use this to manage structure, It has the same entry point of ResponseContainer but data is a void pointer to manage complex structure.
 
-`ResponseStructContainer c;`
-`c = e32ttl100.getConfiguration();`
-`// It's important get configuration pointer before all other operation`
-`Configuration configuration = *(Configuration*) c.data;`
-`Serial.println(c.status.getResponseDescription());`
-`Serial.println(c.status.code);`
+```cpp
+ResponseStructContainer c;
+c = e32ttl100.getConfiguration();
+// It's important get configuration pointer before all other operation
+Configuration configuration = *(Configuration*) c.data;
+Serial.println(c.status.getResponseDescription());
+Serial.println(c.status.code);
+```
 
 #### getConfiguration and setConfiguration
 
 The first method is getConfiguration, you can use It to retrive all data stored on device.
 
-`ResponseStructContainer getConfiguration();`
+```cpp
+ResponseStructContainer getConfiguration();
+```
 
 Here an usage example.
-`ResponseStructContainer c;`
-`c = e32ttl100.getConfiguration();`
-`// It's important get configuration pointer before all other operation`
-`Configuration configuration = *(Configuration*) c.data;`
-`Serial.println(c.status.getResponseDescription());`
-`Serial.println(c.status.code);`
-`Serial.println(configuration.SPED.getUARTBaudRate());`
+
+```cpp
+ResponseStructContainer c;
+c = e32ttl100.getConfiguration();
+// It's important get configuration pointer before all other operation
+Configuration configuration = *(Configuration*) c.data;
+Serial.println(c.status.getResponseDescription());
+Serial.println(c.status.code);
+Serial.println(configuration.SPED.getUARTBaudRate());
+```
 
 Structure of configuration have all data of settings, and I add a series of function to get all description of single data.
 
-`configuration.ADDL = 0x0;` `// First part of address`
-`configuration.ADDH = 0x1;` `// Second part of address`
-`configuration.CHAN = 0x19;``// Channel`
-`configuration.OPTION.fec = FEC_0_OFF;` `// Forward error correction switch`
-`configuration.OPTION.fixedTransmission = FT_TRANSPARENT_TRANSMISSION;` `// Transmission mode`
-`configuration.OPTION.ioDriveMode = IO_D_MODE_PUSH_PULLS_PULL_UPS;` `// Pull-up management`
-`configuration.OPTION.transmissionPower = POWER_17;` `// dBm transmission power`
-`configuration.OPTION.wirelessWakeupTime = WAKE_UP_1250;` `// Wait time for wake up`
-`configuration.SPED.airDataRate = AIR_DATA_RATE_011_48;` `// Air data rate`
-`configuration.SPED.uartBaudRate = UART_BPS_115200;` `// Communication baud rate`
-`configuration.SPED.uartParity = MODE_00_8N1;` `// Parity bit`
+```cpp
+configuration.ADDL = 0x0; // First part of address
+configuration.ADDH = 0x1; // Second part of address
+configuration.CHAN = 0x19; // Channel
+configuration.OPTION.fec = FEC_0_OFF; // Forward error correction switch
+configuration.OPTION.fixedTransmission = FT_TRANSPARENT_TRANSMISSION; // Transmission mode
+configuration.OPTION.ioDriveMode = IO_D_MODE_PUSH_PULLS_PULL_UPS; // Pull-up management
+configuration.OPTION.transmissionPower = POWER_17; // dBm transmission power
+configuration.OPTION.wirelessWakeupTime = WAKE_UP_1250; // Wait time for wake up
+configuration.SPED.airDataRate = AIR_DATA_RATE_011_48; // Air data rate
+configuration.SPED.uartBaudRate = UART_BPS_115200; // Communication baud rate
+configuration.SPED.uartParity = MODE_00_8N1; // Parity bit
+```
 
 You have the equivalent function to get all description:
 
-`Serial.print(F(``"Chan : "``)); Serial.print(configuration.CHAN, DEC); Serial.print(``" -> "``); Serial.println(configuration.getChannelDescription());`
-`Serial.println(F(``" "``));`
-`Serial.print(F(``"SpeedParityBit : "``)); Serial.print(configuration.SPED.uartParity, BIN);Serial.print(``" -> "``); Serial.println(configuration.SPED.getUARTParityDescription());`
-`Serial.print(F(``"SpeedUARTDatte : "``)); Serial.print(configuration.SPED.uartBaudRate, BIN);Serial.print(``" -> "``); Serial.println(configuration.SPED.getUARTBaudRate());`
-`Serial.print(F(``"SpeedAirDataRate : "``)); Serial.print(configuration.SPED.airDataRate, BIN);Serial.print(``" -> "``); Serial.println(configuration.SPED.getAirDataRate());`
-`Serial.print(F(``"OptionTrans : "``)); Serial.print(configuration.OPTION.fixedTransmission, BIN);Serial.print(``" -> "``); Serial.println(configuration.OPTION.getFixedTransmissionDescription());`
-`Serial.print(F(``"OptionPullup : "``)); Serial.print(configuration.OPTION.ioDriveMode, BIN);Serial.print(``" -> "``); Serial.println(configuration.OPTION.getIODroveModeDescription());`
-`Serial.print(F(``"OptionWakeup : "``)); Serial.print(configuration.OPTION.wirelessWakeupTime, BIN);Serial.print(``" -> "``); Serial.println(configuration.OPTION.getWirelessWakeUPTimeDescription());`
-`Serial.print(F(``"OptionFEC : "``)); Serial.print(configuration.OPTION.fec, BIN);Serial.print(``" -> "``); Serial.println(configuration.OPTION.getFECDescription());`
-`Serial.print(F(``"OptionPower : "``)); Serial.print(configuration.OPTION.transmissionPower, BIN);Serial.print(``" -> "``); Serial.println(configuration.OPTION.getTransmissionPowerDescription());`
+```cpp
+Serial.print(F("Chan : ")); Serial.print(configuration.CHAN, DEC); Serial.print(" -> "); Serial.println(configuration.getChannelDescription());
+Serial.println(F(" "));
+Serial.print(F("SpeedParityBit : ")); Serial.print(configuration.SPED.uartParity, BIN);Serial.print(" -> "); Serial.println(configuration.SPED.getUARTParityDescription());
+Serial.print(F("SpeedUARTDatte : ")); Serial.print(configuration.SPED.uartBaudRate, BIN);Serial.print(" -> "); Serial.println(configuration.SPED.getUARTBaudRate());
+Serial.print(F("SpeedAirDataRate : ")); Serial.print(configuration.SPED.airDataRate, BIN);Serial.print(" -> "); Serial.println(configuration.SPED.getAirDataRate());
+Serial.print(F("OptionTrans : ")); Serial.print(configuration.OPTION.fixedTransmission, BIN);Serial.print(" -> "); Serial.println(configuration.OPTION.getFixedTransmissionDescription());
+Serial.print(F("OptionPullup : ")); Serial.print(configuration.OPTION.ioDriveMode, BIN);Serial.print(" -> "); Serial.println(configuration.OPTION.getIODroveModeDescription());
+Serial.print(F("OptionWakeup : ")); Serial.print(configuration.OPTION.wirelessWakeupTime, BIN);Serial.print(" -> "); Serial.println(configuration.OPTION.getWirelessWakeUPTimeDescription());
+Serial.print(F("OptionFEC : ")); Serial.print(configuration.OPTION.fec, BIN);Serial.print(" -> "); Serial.println(configuration.OPTION.getFECDescription());
+Serial.print(F("OptionPower : ")); Serial.print(configuration.OPTION.transmissionPower, BIN);Serial.print(" -> "); Serial.println(configuration.OPTION.getTransmissionPowerDescription());
+```
 
 At same way setConfiguration want a configuration strucutre, so I think the better way to manage configuration is to retrieve the current one, apply the only change you need and set It again.
 
-`ResponseStatus setConfiguration(Configuration configuration, PROGRAM_COMMAND saveType = WRITE_CFG_PWR_DWN_LOSE);`
+```cpp
+ResponseStatus setConfiguration(Configuration configuration, PROGRAM_COMMAND saveType = WRITE_CFG_PWR_DWN_LOSE);
+```
 
 `configuration` is the strucutre previsiouly show,  `saveType` permit to you to choiche if the change become permanently of only for the current session.
 
-`ResponseStructContainer c;`
-`c = e32ttl100.getConfiguration();`
-`// It's important get configuration pointer before all other operation`
-`Configuration configuration = *(Configuration*) c.data;`
-`Serial.println(c.status.getResponseDescription());`
-`Serial.println(c.status.code);`
-`printParameters(configuration);`
-`configuration.ADDL = 0x0;`
-`configuration.ADDH = 0x1;`
-`configuration.CHAN = 0x19;`
-`configuration.OPTION.fec = FEC_0_OFF;`
-`configuration.OPTION.fixedTransmission = FT_TRANSPARENT_TRANSMISSION;`
-`configuration.OPTION.ioDriveMode = IO_D_MODE_PUSH_PULLS_PULL_UPS;`
-`configuration.OPTION.transmissionPower = POWER_17;`
-`configuration.OPTION.wirelessWakeupTime = WAKE_UP_1250;`
-`configuration.SPED.airDataRate = AIR_DATA_RATE_011_48;`
-`configuration.SPED.uartBaudRate = UART_BPS_115200;`
-`configuration.SPED.uartParity = MODE_00_8N1;`
-`// Set configuration changed and set to not hold the configuration`
-`ResponseStatus rs = e32ttl100.setConfiguration(configuration, WRITE_CFG_PWR_DWN_LOSE);`
-`Serial.println(rs.getResponseDescription());`
-`Serial.println(rs.code);`
-`printParameters(configuration);`
+```cpp
+ResponseStructContainer c;
+c = e32ttl100.getConfiguration();
+// It's important get configuration pointer before all other operation
+Configuration configuration = *(Configuration*) c.data;
+Serial.println(c.status.getResponseDescription());
+Serial.println(c.status.code);
+printParameters(configuration);
+configuration.ADDL = 0x0;
+configuration.ADDH = 0x1;
+configuration.CHAN = 0x19;
+configuration.OPTION.fec = FEC_0_OFF;
+configuration.OPTION.fixedTransmission = FT_TRANSPARENT_TRANSMISSION;
+configuration.OPTION.ioDriveMode = IO_D_MODE_PUSH_PULLS_PULL_UPS;
+configuration.OPTION.transmissionPower = POWER_17;
+configuration.OPTION.wirelessWakeupTime = WAKE_UP_1250;
+configuration.SPED.airDataRate = AIR_DATA_RATE_011_48;
+configuration.SPED.uartBaudRate = UART_BPS_115200;
+configuration.SPED.uartParity = MODE_00_8N1;
+// Set configuration changed and set to not hold the configuration
+ResponseStatus rs = e32ttl100.setConfiguration(configuration, WRITE_CFG_PWR_DWN_LOSE);
+Serial.println(rs.getResponseDescription());
+Serial.println(rs.code);
+printParameters(configuration);
+```
 
 The parameter all all managed as constant:
 
@@ -392,14 +429,18 @@ Transmission power
 
 You can change this set of constant by apply a define like so:
 
-`#define E32_TTL_100 // default value without set`
+```cpp
+#define E32_TTL_100 // default value without set
+```
 
 Applicable for  **E32-TTL-100, E32-TTL-100S1, E32-T100S2.**  
 The external power must make sure the ability of current output more than 250mA and ensure the power supply ripple within 100mV.  
 Low power transmission is not recommended due to its low power supply  
 efficiency.
 
-`#define E32_TTL_100 // default value without set`
+```cpp
+#define E32_TTL_100 // default value without set
+```
 
 |1|0|Transmission power (approximation)|Constant value|
 |---|---|---|---|
@@ -412,7 +453,9 @@ Applicable for E32-TTL-500。
 The external power must make sure the ability of current output more than 700mA and ensure the power supply ripple within 100mV.  
 Low power transmission is not recommended due to its low power supply efficiency.
 
-`#define E32_TTL_500`
+```cpp
+#define E32_TTL_500
+```
 
 |1|0|Transmission power (approximation)|Constant value|
 |---|---|---|---|
@@ -426,7 +469,9 @@ The external power must make sure the ability of current output more than 1A and
 Low power transmission is not recommended due to its low power supply  
 efficiency.
 
-`#define E32_TTL_1W`
+```cpp
+#define E32_TTL_1W
+```
 
 |1|0|Transmission power (approximation)|Constant value|
 |---|---|---|---|
@@ -438,24 +483,23 @@ efficiency.
 You can configure Channel frequency olso with this define:
 
 
-`// One of`
+```cpp
+// One of
 
-`#define FREQUENCY_433`
-
-`#define FREQUENCY_170`
-
-`#define FREQUENCY_470`
-
-`#define FREQUENCY_868`
-
-`#define FREQUENCY_915`
+#define FREQUENCY_433
+#define FREQUENCY_170
+#define FREQUENCY_470
+#define FREQUENCY_868
+#define FREQUENCY_915
+```
 
 ### Send receive message
 
 First we must introduce a simple but usefully method to check if something is in the receiving buffer
 
-
-`int` `available();`
+```cpp
+int available();
+```
 
 It’s simply return how many bytes you have in the current stream.
 
@@ -469,108 +513,116 @@ LoRa E32 transmitting scenarios, lines are channels
 
 There are a lot of method to send/receive message, we are going to explain in detail:
 
+```cpp
+ResponseStatus sendMessage(const String message);
+```
 
-`ResponseStatus sendMessage(``const` `String message);`
-
-`ResponseContainer receiveMessage();`
+```cpp
+ResponseContainer receiveMessage();
+```
 
 First method is sendMessage and is used to send a String to a device in  **Normal mode**.
 
-
-`ResponseStatus rs = e32ttl.sendMessage(``"Prova"``);`
-
-`Serial.println(rs.getResponseDescription());`
+```cpp
+ResponseStatus rs = e32ttl.sendMessage("Prova");
+Serial.println(rs.getResponseDescription());
+```
 
 The other device simply do on the loop
 
 
-`if` `(e32ttl.available() > 1){`
-
-`ResponseContainer rs = e32ttl.receiveMessage();`
-
-`String message = rs.data;` `// First ever get the data`
-
-`Serial.println(rs.status.getResponseDescription());`
-
-`Serial.println(message);`
-
-`}`
+```cpp
+if (e32ttl.available() > 1){
+ResponseContainer rs = e32ttl.receiveMessage();
+String message = rs.data;` `// First ever get the data
+Serial.println(rs.status.getResponseDescription());
+Serial.println(message);
+}
+```
 
 #### Manage structure
 
 If you want send a complex strucuture you can use this method
 
 
-`ResponseStatus sendMessage(``const` `void` `*message,` `const` `uint8_t size);`
+```cpp
+ResponseStatus sendMessage(const void *message, const uint8_t size);
 
-`ResponseStructContainer receiveMessage(``const` `uint8_t size);`
+ResponseStructContainer receiveMessage(const uint8_t size);
+```
 
 It’s used to send strucutre, for example:
 
+```cpp
+struct Messaggione {
 
-`struct` `Messaggione {`
+char type[5];
 
-`char` `type[5];`
+char message[8];
 
-`char` `message[8];`
+bool mitico;
 
-`bool` `mitico;`
+};
 
-`};`
+struct Messaggione messaggione = {"TEMP", "Peple", true};
 
-`struct` `Messaggione messaggione = {``"TEMP"``,` `"Peple"``,` `true``};`
+ResponseStatus rs = e32ttl.sendMessage(&amp;messaggione, sizeof(Messaggione));
 
-`ResponseStatus rs = e32ttl.sendMessage(&amp;messaggione,` `sizeof``(Messaggione));`
-
-`Serial.println(rs.getResponseDescription());`
+Serial.println(rs.getResponseDescription());
+```
 
 and the other side you can receive the message so
 
-`ResponseStructContainer rsc = e32ttl.receiveMessage(``sizeof``(Messaggione));`
+```cpp
+ResponseStructContainer rsc = e32ttl.receiveMessage(sizeof(Messaggione));
 
-`struct` `Messaggione messaggione = *(Messaggione*) rsc.data;`
+struct Messaggione messaggione = *(Messaggione*) rsc.data;
 
-`Serial.println(messaggione.message);`
+Serial.println(messaggione.message);
 
-`Serial.println(messaggione.mitico);`
+Serial.println(messaggione.mitico);
+```
 
 ##### Read partial strucure
 
 If you want read first part of the message to manage more type of strucutre you can use this method.
 
 
-`ResponseContainer receiveInitialMessage(``const` `uint8_t size);`
+```cpp
+ResponseContainer receiveInitialMessage(const uint8_t size);
+```
 
 I create It to receive a string with type or other to identify the strucuture to load.
 
+```cpp
+struct Messaggione { // Partial strucutre without type
 
-`struct` `Messaggione {` `// Partial strucutre without type`
+char message[8];
 
-`char` `message[8];`
+bool mitico;
 
-`bool` `mitico;`
+};
 
-`};`
+char type[5]; // first part of structure
 
-`char` `type[5];` `// first part of structure`
+ResponseContainer rs = e32ttl.receiveInitialMessage(sizeof(type));
 
-`ResponseContainer rs = e32ttl.receiveInitialMessage(``sizeof``(type));`
+// Put string in a char array (not needed)
 
-`// Put string in a char array (not needed)`
+memcpy ( type, rs.data.c_str(), sizeof(type) );
 
-`memcpy` `( type, rs.data.c_str(),` `sizeof``(type) );`
+Serial.println("READ TYPE: ");
 
-`Serial.println(``"READ TYPE: "``);`
+Serial.println(rs.status.getResponseDescription());
 
-`Serial.println(rs.status.getResponseDescription());`
+Serial.println(type);
 
-`Serial.println(type);`
+// Read the rest of structure
 
-`// Read the rest of structure`
+ResponseStructContainer rsc = e32ttl.receiveMessage(sizeof(Messaggione));
 
-`ResponseStructContainer rsc = e32ttl.receiveMessage(``sizeof``(Messaggione));`
-
-`struct` `Messaggione messaggione = *(Messaggione*) rsc.data;`
+struct Messaggione messaggione = *(Messaggione*) rsc.data;
+```
 
 #### Fixed mode instead of normal mode
 
@@ -582,23 +634,27 @@ At same manner I create a set of method to use with fixed transmission
 
 So for String message you have
 
-`ResponseStatus sendFixedMessage(byte ADDL, byte ADDH, byte CHAN,` `const` `String message);`
+```cpp
+ResponseStatus sendFixedMessage(byte ADDL, byte ADDH, byte CHAN, const String message);
 
-`ResponseStatus sendBroadcastFixedMessage(byte CHAN,` `const` `String message);`
+ResponseStatus sendBroadcastFixedMessage(byte CHAN, const String message);
+```
 
 and for structure you have
 
+```cpp
+ResponseStatus sendFixedMessage(byte ADDL, byte ADDH, byte CHAN, const void *message, const uint8_t size);
 
-`ResponseStatus sendFixedMessage(byte ADDL, byte ADDH, byte CHAN,` `const` `void` `*message,` `const` `uint8_t size);`
-
-`ResponseStatus sendBroadcastFixedMessage(byte CHAN,` `const` `void` `*message,` `const` `uint8_t size );`
+ResponseStatus sendBroadcastFixedMessage(byte CHAN, const void *message, const uint8_t size );
+```
 
 Here a simple example
 
+```cpp
+ResponseStatus rs = e32ttl.sendFixedMessage(0, 0, 0x17, &amp;messaggione, sizeof(Messaggione));
 
-`ResponseStatus rs = e32ttl.sendFixedMessage(0, 0, 0x17, &amp;messaggione,` `sizeof``(Messaggione));`
-
-`// ResponseStatus rs = e32ttl.sendFixedMessage(0, 0, 0x17, "Ciao");`
+// ResponseStatus rs = e32ttl.sendFixedMessage(0, 0, 0x17, "Ciao");
+```
 
 Fixed transmission have more scenarios
 
@@ -608,43 +664,47 @@ LoRa E32 transmitting scenarios, lines are channels
 
 If you send to a specific device (second scenarios Fixed transmission) you must add ADDL, ADDH and CHAN to identify It directly.
 
-`ResponseStatus rs = e32ttl.sendFixedMessage(2, 2, 0x17,` `"Message to a device"``);`
+```cpp
+ResponseStatus rs = e32ttl.sendFixedMessage(2, 2, 0x17, "Message to a device");
+```
 
 If you want send a message to all device in a specified Channel you can use this method.
 
-
-`ResponseStatus rs = e32ttl.sendBroadcastFixedMessage(0x17, "Message to a devices of a channel");`
+```cpp
+ResponseStatus rs = e32ttl.sendBroadcastFixedMessage(0x17, "Message to a devices of a channel");
+```
 
 If you want receive all broadcast message in the network you must set your  `ADDH` and  `ADDL` with  `BROADCAST_ADDRESS`.
 
+```cpp
+ResponseStructContainer c;
 
-`ResponseStructContainer c;`
+c = e32ttl100.getConfiguration();
 
-`c = e32ttl100.getConfiguration();`
+// It's important get configuration pointer before all other operation
 
-`// It's important get configuration pointer before all other operation`
+Configuration configuration = *(Configuration*) c.data;
 
-`Configuration configuration = *(Configuration*) c.data;`
+Serial.println(c.status.getResponseDescription());
 
-`Serial.println(c.status.getResponseDescription());`
+Serial.println(c.status.code);
 
-`Serial.println(c.status.code);`
+printParameters(configuration);
 
-`printParameters(configuration);`
+configuration.ADDL = BROADCAST_ADDRESS;
 
-`configuration.ADDL = BROADCAST_ADDRESS;`
+configuration.ADDH = BROADCAST_ADDRESS;
 
-`configuration.ADDH = BROADCAST_ADDRESS;`
+// Set configuration changed and set to not hold the configuration
 
-`// Set configuration changed and set to not hold the configuration`
+ResponseStatus rs = e32ttl100.setConfiguration(configuration, WRITE_CFG_PWR_DWN_LOSE);
 
-`ResponseStatus rs = e32ttl100.setConfiguration(configuration, WRITE_CFG_PWR_DWN_LOSE);`
+Serial.println(rs.getResponseDescription());
 
-`Serial.println(rs.getResponseDescription());`
+Serial.println(rs.code);
 
-`Serial.println(rs.code);`
-
-`printParameters(configuration);`
+printParameters(configuration);
+```
 
 ## Thanks
 
