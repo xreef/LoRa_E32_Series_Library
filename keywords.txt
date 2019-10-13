@@ -1,0 +1,30 @@
+###########################################
+# Syntax Coloring Map For LoRa_E32_Series-library
+###########################################
+
+###########################################
+# Datatypes (KEYWORD1)
+###########################################
+
+LoRa_E32	KEYWORD1
+
+###########################################
+# Methods and Functions (KEYWORD2)
+###########################################
+
+begin	KEYWORD2
+
+getConfiguration	KEYWORD2
+setConfiguration	KEYWORD2
+
+getModuleInformation	KEYWORD2
+printParameters	KEYWORD2
+resetModule	KEYWORD2
+
+sendMessage	KEYWORD2
+receiveMessage	KEYWORD2
+
+sendFixedMessage	KEYWORD2
+sendBroadcastFixedMessage	KEYWORD2
+
+receiveInitialMessage	KEYWORD2
