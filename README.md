@@ -1,5 +1,11 @@
 ﻿#Please be patient I start a complete tutoria to publish on my site www.mischianti.org
 
+1.  [LoRa E32 device for Arduino, esp32 or esp8266: settings and basic usage](https://www.mischianti.org/2019/10/15/lora-e32-device-for-arduino-esp32-or-esp8266-specs-and-basic-usage-part-1/)
+2.  LoRa E32 device for Arduino, esp32 or esp8266: library
+4.  LoRa E32 device for Arduino, esp32 or esp8266: configuration
+5.  LoRa E32 device for Arduino, esp32 or esp8266: fixed transmission
+6.  LoRa E32 device for Arduino, esp32 or esp8266: power saving and sending structured data
+
 #LoRa E32 (EBYTE LoRa SX1278/SX1276) series Library for Arduino, esp8266 and esp32-
 
 I create a library to manage EBYTE E32 series of LoRa device, very powerfull, simple and cheap device.
