@@ -1,7 +1,7 @@
 /*
  * LoRa E32-TTL-100
  * Start device, reset or write to the Serial to send a message.
- * https://www.mischianti.org
+ * https://www.mischianti.org/2019/10/15/lora-e32-device-for-arduino-esp32-or-esp8266-specs-and-basic-usage-part-1/
  *
  * E32-TTL-100----- Arduino UNO
  * M0         ----- GND

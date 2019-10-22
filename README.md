@@ -1,7 +1,7 @@
 ﻿#Please be patient I start a complete tutoria to publish on my site www.mischianti.org
 
 1.  [LoRa E32 device for Arduino, esp32 or esp8266: settings and basic usage](https://www.mischianti.org/2019/10/15/lora-e32-device-for-arduino-esp32-or-esp8266-specs-and-basic-usage-part-1/)
-2.  LoRa E32 device for Arduino, esp32 or esp8266: library
+2.  [LoRa E32 device for Arduino, esp32 or esp8266: library](https://www.mischianti.org/2019/10/21/lora-e32-device-for-arduino-esp32-or-esp8266-library-part-2/)
 4.  LoRa E32 device for Arduino, esp32 or esp8266: configuration
 5.  LoRa E32 device for Arduino, esp32 or esp8266: fixed transmission
 6.  LoRa E32 device for Arduino, esp32 or esp8266: power saving and sending structured data
