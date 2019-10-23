@@ -1,11 +1,10 @@
 /*
- * E32-TTL-x
- * https://www.mischianti.org/
- * https://github.com/franksmicro/Arduino/blob/master/libraries/Keeloq/Keeloq.cpp
+ * EBYTE LoRa E32 Series
+ * https://www.mischianti.org/category/my-libraries/lora-e32-devices/
  *
  * The MIT License (MIT)
  *
- * Copyright (c) 2017 Renzo Mischianti www.mischianti.org All right reserved.
+ * Copyright (c) 2019 Renzo Mischianti www.mischianti.org All right reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
