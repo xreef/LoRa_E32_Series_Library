@@ -14,7 +14,7 @@ I create a library to manage EBYTE E32 series of LoRa device, very powerfull, si
 
 LoRa E32-TTL-100
 
-You can buy here [AliExpress](http://s.click.aliexpress.com/e/eOHotRkU)
+You can find here [AliExpress (3Km device)](http://s.click.aliexpress.com/e/eOHotRkU) [AliExpress (8Km device)](http://s.click.aliexpress.com/e/qRuqOQQM)
 
 They can work over a distance of 3000m to 8000m, and they have a lot of features and parameter.
 
