@@ -26,7 +26,6 @@
  */
 
 #include "LoRa_E32.h"
-#include <SoftwareSerial.h>
 
 LoRa_E32::LoRa_E32(byte rxPin, byte txPin, UART_BPS_RATE bpsRate){
     this->rxPin = rxPin;
@@ -131,7 +130,7 @@ LoRa_E32::LoRa_E32(SoftwareSerial* serial, byte auxPin, byte m0Pin, byte m1Pin, 
     this->bpsRate = bpsRate;
 }
 
-void LoRa_E32::begin(){
+bool LoRa_E32::begin(){
 	if (this->auxPin != 0) {
 		pinMode(this->auxPin, INPUT);
 		DEBUG_PRINTLN("Init AUX pin!");
@@ -169,7 +168,8 @@ void LoRa_E32::begin(){
 	}
 
     this->serialDef.stream->setTimeout(1000);
-    setMode(MODE_0_NORMAL);
+    Status status = setMode(MODE_0_NORMAL);
+    return status==SUCCESS;
 }
 
 /*
@@ -314,7 +314,8 @@ Status LoRa_E32::sendStruct(void *structureManaged, uint16_t size_) {
 			result = ERR_DATA_SIZE_NOT_MATCH;
 		}
 
-		this->waitCompleteResponse(1000);
+		result = this->waitCompleteResponse(1000);
+		if (result != SUCCESS) return result;
 
 		this->cleanUARTBuffer();
 
@@ -340,11 +341,14 @@ Status LoRa_E32::receiveStruct(void *structureManaged, uint16_t size_) {
 	Status result = SUCCESS;
 
 	uint8_t len = this->serialDef.stream->readBytes((uint8_t *) structureManaged, size_);
-	this->waitCompleteResponse(1000);
-
 	if (len!=size_){
 		result = ERR_DATA_SIZE_NOT_MATCH;
 	}
+	if (result != SUCCESS) return result;
+
+	result = this->waitCompleteResponse(1000);
+	if (result != SUCCESS) return result;
+
 	DEBUG_PRINT("Available buffer: ");
 	DEBUG_PRINT(len);
 	DEBUG_PRINT(" structure size: ");
@@ -521,7 +525,9 @@ ResponseStatus LoRa_E32::resetModule(){
 
 	this->writeProgramCommand(WRITE_RESET_MODULE);
 
-	this->waitCompleteResponse(1000);
+	status.code = this->waitCompleteResponse(1000);
+	if (status.code!=SUCCESS) return status;
+
 
 	status.code = this->setMode(prevMode);
 	if (status.code!=SUCCESS) return status;

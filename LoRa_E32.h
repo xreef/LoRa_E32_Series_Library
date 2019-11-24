@@ -44,7 +44,7 @@
 #endif
 
 // Uncomment to enable printing out nice debug messages.
- #define LoRa_E32_DEBUG
+// #define LoRa_E32_DEBUG
 
 // Define where debug output will be printed.
 #define DEBUG_PRINTER Serial
@@ -184,7 +184,7 @@ class LoRa_E32 {
 //		LoRa_E32(HardwareSerial* serial = &Serial, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600, MODE_TYPE mode = MODE_0_NORMAL);
 //		LoRa_E32(SoftwareSerial* serial, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600, MODE_TYPE mode = MODE_0_NORMAL);
 
-		void begin();
+		bool begin();
         Status setMode(uint8_t mode);
 
 		ResponseStructContainer getConfiguration();
