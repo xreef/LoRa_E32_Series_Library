@@ -277,6 +277,8 @@ Serial.println(c.status.code);
 Serial.println(configuration.SPED.getUARTBaudRate());
 ```
 
+![Get configuration](https://www.mischianti.org/wp-content/uploads/2019/12/E32_request_configuration_logic_analyzer-1024x319.jpg)
+
 Structure of configuration have all data of settings, and I add a series of function to get all description of single data.
 
 ```cpp

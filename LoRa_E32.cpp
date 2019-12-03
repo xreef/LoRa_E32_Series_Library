@@ -138,10 +138,14 @@ bool LoRa_E32::begin(){
 	if (this->m0Pin != 0) {
 		pinMode(this->m0Pin, OUTPUT);
 		DEBUG_PRINTLN("Init M0 pin!");
+		digitalWrite(this->m0Pin, HIGH);
+
 	}
 	if (this->m1Pin != 0) {
 		pinMode(this->m1Pin, OUTPUT);
 		DEBUG_PRINTLN("Init M1 pin!");
+		digitalWrite(this->m1Pin, HIGH);
+
 	}
 
     DEBUG_PRINTLN("Begin ex");
