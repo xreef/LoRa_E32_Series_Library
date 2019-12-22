@@ -210,13 +210,13 @@ Status LoRa_E32::waitCompleteResponse(unsigned long timeout, unsigned int waitNo
 		// if you can't use aux pin, use 4K7 pullup with Arduino
 		// you may need to adjust this value if transmissions fail
 		this->managedDelay(waitNoAux);
-		DEBUG_PRINTLN("Wait no AUX pin!");
+		DEBUG_PRINTLN(F("Wait no AUX pin!"));
 	}
 
 
 	// per data sheet control after aux goes high is 2ms so delay for at least that long)
 	this->managedDelay(20);
-
+	DEBUG_PRINTLN(F("Complete!"));
 	return result;
 }
 
@@ -320,8 +320,10 @@ Status LoRa_E32::sendStruct(void *structureManaged, uint16_t size_) {
 
 		result = this->waitCompleteResponse(1000);
 		if (result != SUCCESS) return result;
-
+		DEBUG_PRINT(F("Clear buffer..."))
 		this->cleanUARTBuffer();
+
+		DEBUG_PRINTLN(F("ok!"))
 
 		return result;
 }
@@ -575,10 +577,10 @@ ResponseStatus LoRa_E32::sendMessage(const void *message, const uint8_t size){
 	return status;
 }
 ResponseStatus LoRa_E32::sendMessage(const String message){
-	DEBUG_PRINT("Send message: ");
+	DEBUG_PRINT(F("Send message: "));
 	DEBUG_PRINT(message);
 	byte size = message.length(); // sizeof(message.c_str())+1;
-	DEBUG_PRINT(" size: ");
+	DEBUG_PRINT(F(" size: "));
 	DEBUG_PRINTLN(size);
 	char messageFixed[size];
 	memcpy(messageFixed,message.c_str(),size);
@@ -587,7 +589,7 @@ ResponseStatus LoRa_E32::sendMessage(const String message){
 	status.code = this->sendStruct((uint8_t *)&messageFixed, size);
 	if (status.code!=SUCCESS) return status;
 
-	free(messageFixed);
+//	free(messageFixed);
 	return status;
 }
 
@@ -676,7 +678,7 @@ ResponseStatus LoRa_E32::sendFixedMessage( byte ADDH,byte ADDL, byte CHAN, const
 	status.code = this->sendStruct((uint8_t *)fixedStransmission, size+3);
 	if (status.code!=SUCCESS) return status;
 
-	free(fixedStransmission);
+//	free(fixedStransmission);
 
 	return status;
 }
