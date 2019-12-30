@@ -30,6 +30,8 @@ They can work over a distance of 3000m to 8000m, and they have a lot of features
 
 So i create this library to simplify the usage.
 
+Please refer to my article to get updated Schema
+
 ### Library
 
 You can find my library here.
