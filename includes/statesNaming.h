@@ -345,7 +345,7 @@ static String getFECDescriptionByParams(byte fec)
 			return F("Invalid transmission power param");
 		}
 	}
-#elif E32_TTL_500
+#elif defined(E32_TTL_500)
 	enum TRANSMISSION_POWER
 	{
 	  POWER_27 = B00,
@@ -375,7 +375,7 @@ static String getFECDescriptionByParams(byte fec)
 			return F("Invalid transmission power param");
 		}
 	}
-#elif E32_TTL_1W
+#elif defined(E32_TTL_1W)
 	enum TRANSMISSION_POWER
 	{
 	  POWER_30 = B00,
