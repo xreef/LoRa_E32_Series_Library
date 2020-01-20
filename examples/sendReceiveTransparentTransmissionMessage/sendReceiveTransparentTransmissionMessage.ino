@@ -27,7 +27,7 @@
 
 // ---------- Arduino pins --------------
 //LoRa_E32 e32ttl(2, 3, 5, 7, 6);
-LoRa_E32 e32ttl(2, 3); // Config without connect AUX and M0 M1
+LoRa_E32 e32ttl100(2, 3); // Config without connect AUX and M0 M1
 
 //#include <SoftwareSerial.h>
 //SoftwareSerial mySerial(2, 3); // RX, TX

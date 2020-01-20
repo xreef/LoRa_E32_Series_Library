@@ -34,7 +34,14 @@
 #define SOFT_RX_PIN	10
 #define SOFT_TX_PIN 11
 
-#include <SoftwareSerial.h>
+#ifndef ESP32
+	#define ACTIVATE_SOFTWARE_SERIAL
+#endif
+
+#ifdef ACTIVATE_SOFTWARE_SERIAL
+	#include <SoftwareSerial.h>
+#endif
+
 #include <includes/statesNaming.h>
 
 #if ARDUINO >= 100
@@ -165,20 +172,23 @@ struct ResponseContainer {
 //};
 #pragma pack(pop)
 
-
 class LoRa_E32 {
 	public:
-		LoRa_E32(byte rxPin, byte txPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
-		LoRa_E32(byte rxPin, byte txPin, byte auxPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
-		LoRa_E32(byte rxPin, byte txPin, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
+		#ifdef ACTIVATE_SOFTWARE_SERIAL
+			LoRa_E32(byte rxPin, byte txPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
+			LoRa_E32(byte rxPin, byte txPin, byte auxPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
+			LoRa_E32(byte rxPin, byte txPin, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
+		#endif
 
 		LoRa_E32(HardwareSerial* serial, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
 		LoRa_E32(HardwareSerial* serial, byte auxPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
 		LoRa_E32(HardwareSerial* serial, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
 
-		LoRa_E32(SoftwareSerial* serial, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
-		LoRa_E32(SoftwareSerial* serial, byte auxPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
-		LoRa_E32(SoftwareSerial* serial, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
+		#ifdef ACTIVATE_SOFTWARE_SERIAL
+			LoRa_E32(SoftwareSerial* serial, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
+			LoRa_E32(SoftwareSerial* serial, byte auxPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
+			LoRa_E32(SoftwareSerial* serial, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
+		#endif
 
 //		LoRa_E32(byte rxPin, byte txPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600, MODE_TYPE mode = MODE_0_NORMAL);
 //		LoRa_E32(HardwareSerial* serial = &Serial, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600, MODE_TYPE mode = MODE_0_NORMAL);
@@ -211,7 +221,10 @@ class LoRa_E32 {
         int available(unsigned long timeout = 1000);
 	private:
 		HardwareSerial* hs;
-		SoftwareSerial* ss;
+
+		#ifdef ACTIVATE_SOFTWARE_SERIAL
+			SoftwareSerial* ss;
+		#endif
 
 		bool isSoftwareSerial = true;
 
@@ -232,7 +245,7 @@ class LoRa_E32 {
 
 		  template< typename T >
 		  void begin( T &t, int baud ){
-			  Serial.println("Begin ");
+			  DEBUG_PRINTLN("Begin ");
 			  t.setTimeout(500);
 			  t.begin(baud);
 			  stream = &t;

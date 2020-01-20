@@ -27,6 +27,7 @@
 
 #include "LoRa_E32.h"
 
+#ifdef ACTIVATE_SOFTWARE_SERIAL
 LoRa_E32::LoRa_E32(byte rxPin, byte txPin, UART_BPS_RATE bpsRate){
     this->rxPin = rxPin;
     this->txPin = txPin;
@@ -61,12 +62,16 @@ LoRa_E32::LoRa_E32(byte rxPin, byte txPin, byte auxPin, byte m0Pin, byte m1Pin, 
 
     this->bpsRate = bpsRate;
 }
+#endif
 
 LoRa_E32::LoRa_E32(HardwareSerial* serial, UART_BPS_RATE bpsRate){
     this->rxPin = rxPin;
     this->txPin = txPin;
 
-    this->ss = NULL;
+	#ifdef ACTIVATE_SOFTWARE_SERIAL
+    	this->ss = NULL;
+	#endif
+
     this->hs = serial;
 
     this->bpsRate = bpsRate;
@@ -76,8 +81,11 @@ LoRa_E32::LoRa_E32(HardwareSerial* serial, byte auxPin, UART_BPS_RATE bpsRate){
     this->txPin = txPin;
     this->auxPin = auxPin;
 
-    this->ss = NULL;
-    this->hs = serial;
+	#ifdef ACTIVATE_SOFTWARE_SERIAL
+		this->ss = NULL;
+	#endif
+
+	this->hs = serial;
 
     this->bpsRate = bpsRate;
 }
@@ -90,11 +98,16 @@ LoRa_E32::LoRa_E32(HardwareSerial* serial, byte auxPin, byte m0Pin, byte m1Pin, 
     this->m0Pin = m0Pin;
     this->m1Pin = m1Pin;
 
-    this->ss = NULL;
+	#ifdef ACTIVATE_SOFTWARE_SERIAL
+		this->ss = NULL;
+	#endif
+
     this->hs = serial;
 
     this->bpsRate = bpsRate;
 }
+
+#ifdef ACTIVATE_SOFTWARE_SERIAL
 
 LoRa_E32::LoRa_E32(SoftwareSerial* serial, UART_BPS_RATE bpsRate){
     this->rxPin = rxPin;
@@ -129,6 +142,7 @@ LoRa_E32::LoRa_E32(SoftwareSerial* serial, byte auxPin, byte m0Pin, byte m1Pin, 
 
     this->bpsRate = bpsRate;
 }
+#endif
 
 bool LoRa_E32::begin(){
 	if (this->auxPin != 0) {
@@ -153,7 +167,8 @@ bool LoRa_E32::begin(){
         DEBUG_PRINTLN("Begin Hardware Serial");
 
     	this->serialDef.begin(*this->hs, this->bpsRate);
-	}else if (this->ss){
+#ifdef ACTIVATE_SOFTWARE_SERIAL
+    }else if (this->ss){
         DEBUG_PRINTLN("Begin Software Serial");
 
 		this->serialDef.begin(*this->ss, this->bpsRate);
@@ -169,6 +184,7 @@ bool LoRa_E32::begin(){
         DEBUG_PRINTLN((int)this->txPin);
 
 		this->serialDef.begin(*this->ss, this->bpsRate);
+#endif
 	}
 
     this->serialDef.stream->setTimeout(1000);
