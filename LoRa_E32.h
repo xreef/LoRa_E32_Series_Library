@@ -184,6 +184,12 @@ class LoRa_E32 {
 		LoRa_E32(HardwareSerial* serial, byte auxPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
 		LoRa_E32(HardwareSerial* serial, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
 
+		#ifdef ESP32
+			LoRa_E32(HardwareSerial* serial, byte rxPin, byte txPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600, uint32_t serialConfig = SERIAL_8N1);
+			LoRa_E32(HardwareSerial* serial, byte rxPin, byte txPin, byte auxPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600, uint32_t serialConfig = SERIAL_8N1);
+			LoRa_E32(HardwareSerial* serial, byte rxPin, byte txPin, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600, uint32_t serialConfig = SERIAL_8N1);
+		#endif
+
 		#ifdef ACTIVATE_SOFTWARE_SERIAL
 			LoRa_E32(SoftwareSerial* serial, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
 			LoRa_E32(SoftwareSerial* serial, byte auxPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
@@ -232,6 +238,8 @@ class LoRa_E32 {
         byte txPin = 0;
         byte auxPin = 0;
 
+        uint32_t serialConfig = SERIAL_8N1;
+
         byte m0Pin = 0;
         byte m1Pin = 0;
 
@@ -244,10 +252,18 @@ class LoRa_E32 {
 		struct NeedsStream{
 
 		  template< typename T >
-		  void begin( T &t, int baud ){
+		  void begin( T &t, int baud, uint32_t config ){
 			  DEBUG_PRINTLN("Begin ");
 			  t.setTimeout(500);
-			  t.begin(baud);
+			  t.begin(baud, config);
+			  stream = &t;
+		  }
+
+		  template< typename T >
+		  void begin( T &t, int baud, uint32_t config, int8_t rxPin, int8_t txPin ){
+			  DEBUG_PRINTLN("Begin ");
+			  t.setTimeout(500);
+			  t.begin(baud, config, rxPin, txPin);
 			  stream = &t;
 		  }
 
