@@ -107,6 +107,24 @@ LoRa_E32::LoRa_E32(HardwareSerial* serial, byte auxPin, byte m0Pin, byte m1Pin, 
     this->bpsRate = bpsRate;
 }
 
+LoRa_E32::LoRa_E32(HardwareSerial* serial, byte rxPin, byte txPin, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate){
+    this->rxPin = rxPin;
+    this->txPin = txPin;
+
+    this->auxPin = auxPin;
+
+    this->m0Pin = m0Pin;
+    this->m1Pin = m1Pin;
+
+	#ifdef ACTIVATE_SOFTWARE_SERIAL
+		this->ss = NULL;
+	#endif
+
+    this->hs = serial;
+
+    this->bpsRate = bpsRate;
+}
+
 #ifdef ACTIVATE_SOFTWARE_SERIAL
 
 LoRa_E32::LoRa_E32(SoftwareSerial* serial, UART_BPS_RATE bpsRate){
@@ -166,7 +184,11 @@ bool LoRa_E32::begin(){
     if (this->hs){
         DEBUG_PRINTLN("Begin Hardware Serial");
 
-    	this->serialDef.begin(*this->hs, this->bpsRate);
+			if(this->rxPin != 0 || this->txPin != 0) {
+				this->serialDef.begin(*this->hs, this->bpsRate, SERIAL_8N1, this->rxPin, this->txPin);
+			} else {
+    		this->serialDef.begin(*this->hs, this->bpsRate);
+			}
 #ifdef ACTIVATE_SOFTWARE_SERIAL
     }else if (this->ss){
         DEBUG_PRINTLN("Begin Software Serial");

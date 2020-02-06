@@ -183,6 +183,7 @@ class LoRa_E32 {
 		LoRa_E32(HardwareSerial* serial, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
 		LoRa_E32(HardwareSerial* serial, byte auxPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
 		LoRa_E32(HardwareSerial* serial, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
+		LoRa_E32(HardwareSerial* serial, byte rxPin, byte txPin, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
 
 		#ifdef ACTIVATE_SOFTWARE_SERIAL
 			LoRa_E32(SoftwareSerial* serial, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
@@ -248,6 +249,14 @@ class LoRa_E32 {
 			  DEBUG_PRINTLN("Begin ");
 			  t.setTimeout(500);
 			  t.begin(baud);
+			  stream = &t;
+		  }
+
+			template< typename T >
+			void begin( T &t, int baud, uint32_t config, int8_t rxPin, int8_t txPin ){
+			  DEBUG_PRINTLN("Begin ");
+			  t.setTimeout(500);
+			  t.begin(baud, config, rxPin, txPin);
 			  stream = &t;
 		  }
 
