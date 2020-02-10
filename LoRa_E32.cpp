@@ -74,7 +74,7 @@ LoRa_E32::LoRa_E32(HardwareSerial* serial, UART_BPS_RATE bpsRate){ //, uint32_t 
 
     this->hs = serial;
 
-    this->serialConfig = serialConfig;
+//    this->serialConfig = serialConfig;
 
     this->bpsRate = bpsRate;
 }
@@ -89,7 +89,7 @@ LoRa_E32::LoRa_E32(HardwareSerial* serial, byte auxPin, UART_BPS_RATE bpsRate){ 
 
 	this->hs = serial;
 
-    this->serialConfig = serialConfig;
+//    this->serialConfig = serialConfig;
 
     this->bpsRate = bpsRate;
 }
@@ -107,12 +107,12 @@ LoRa_E32::LoRa_E32(HardwareSerial* serial, byte auxPin, byte m0Pin, byte m1Pin, 
 	#endif
 
     this->hs = serial;
-    this->serialConfig = serialConfig;
+//    this->serialConfig = serialConfig;
 
     this->bpsRate = bpsRate;
 }
 
-#ifdef ESP32
+#ifdef HARDWARE_SERIAL_SELECTABLE_PIN
 LoRa_E32::LoRa_E32(HardwareSerial* serial, byte rxPin, byte txPin, UART_BPS_RATE bpsRate, uint32_t serialConfig){
     this->rxPin = rxPin;
     this->txPin = txPin;
@@ -222,14 +222,15 @@ bool LoRa_E32::begin(){
     if (this->hs){
         DEBUG_PRINTLN("Begin Hardware Serial");
 
-#ifdef ESP32
+#ifdef HARDWARE_SERIAL_SELECTABLE_PIN
         if(this->rxPin != 0 || this->txPin != 0) {
 			this->serialDef.begin(*this->hs, this->bpsRate, this->serialConfig, this->rxPin, this->txPin);
 		}else{
-#endif
-    	this->serialDef.begin(*this->hs, this->bpsRate, this->serialConfig);
-#ifdef ESP32
+			this->serialDef.begin(*this->hs, this->bpsRate, this->serialConfig);
 		}
+#endif
+#ifndef HARDWARE_SERIAL_SELECTABLE_PIN
+        this->serialDef.begin(*this->hs, this->bpsRate);
 #endif
 #ifdef ACTIVATE_SOFTWARE_SERIAL
     }else if (this->ss){
