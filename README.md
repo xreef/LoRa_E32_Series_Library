@@ -1,4 +1,4 @@
-﻿# Please be patient I start a complete tutorial on my site www.mischianti.org
+﻿# A complete tutorial on my site www.mischianti.org
 
 1.  [LoRa E32 device for Arduino, esp32 or esp8266: settings and basic usage](https://www.mischianti.org/2019/10/15/lora-e32-device-for-arduino-esp32-or-esp8266-specs-and-basic-usage-part-1/)
 2.  [LoRa E32 device for Arduino, esp32 or esp8266: library](https://www.mischianti.org/2019/10/21/lora-e32-device-for-arduino-esp32-or-esp8266-library-part-2/)
@@ -6,15 +6,24 @@
 4.  [LoRa E32 device for Arduino, esp32 or esp8266: fixed transmission](https://www.mischianti.org/2019/11/10/lora-e32-device-for-arduino-esp32-or-esp8266-fixed-transmission-part-4/)
 5.  [LoRa E32 device for Arduino, esp32 or esp8266: power saving and sending structured data](https://www.mischianti.org/2019/12/03/lora-e32-device-for-arduino-esp32-or-esp8266-power-saving-and-sending-structured-data-part-5/)
 6.  [LoRa E32 device for Arduino, esp32 or esp8266: WOR (wake on radio) the microcontroller and Arduino shield](https://www.mischianti.org/2019/12/28/lora-e32-device-for-arduino-esp32-or-esp8266-wor-wake-on-radio-the-microcontroller-also-and-new-arduino-shield-part-6/)
-7.  LoRa E32 device for Arduino, esp32 or esp8266: real example ad WeMos D1 shield
+7.  [LoRa E32 device for Arduino, esp32 or esp8266: WOR (wake on radio) microcontroller and new WeMos D1 mini shield](https://www.mischianti.org/2020/01/17/lora-e32-device-for-arduino-esp32-or-esp8266-wor-wake-on-radio-microcontroller-and-new-wemos-d1-mini-shield-part-7/)
 
 
-# An Arduino UNO shield to simplify the usage
+# An Arduino UNO shield to simplify the use
 ![Arduino UNO shield](https://www.mischianti.org/wp-content/uploads/2019/12/ArduinoShieldMountedE32LoRa_min.jpg)
 
 You can order the PCB  [here](https://www.pcbway.com/project/shareproject/LoRa_E32_Series_device_Arduino_shield.html) 
 
 Instruction and assembly video on 6 part of the guide
+
+# An WeMos D1 shield to simplify the use
+![Arduino UNO shield](https://www.mischianti.org/wp-content/uploads/2020/01/WeMosD1ShieldMountedE32LoRa_min.jpg)
+
+You can order the PCB  [here](https://www.pcbway.com/project/shareproject/LoRa_E32_Series_device_WeMos_D1_mini_shield_RF_8km_range.html) 
+
+Instruction and assembly video on 6 part of the guide
+
+
 
 # LoRa E32 (EBYTE LoRa SX1278/SX1276) series Library for Arduino, esp8266 and esp32-
 
