@@ -396,8 +396,13 @@ Status LoRa_E32::sendStruct(void *structureManaged, uint16_t size_) {
 
 		uint8_t len = this->serialDef.stream->write((uint8_t *) structureManaged, size_);
 		if (len!=size_){
-			result = ERR_DATA_SIZE_NOT_MATCH;
+			if (len==0){
+				result = ERR_NO_RESPONSE_FROM_DEVICE;
+			}else{
+				result = ERR_DATA_SIZE_NOT_MATCH;
+			}
 		}
+		if (result != SUCCESS) return result;
 
 		result = this->waitCompleteResponse(1000);
 		if (result != SUCCESS) return result;
@@ -428,18 +433,23 @@ Status LoRa_E32::receiveStruct(void *structureManaged, uint16_t size_) {
 	Status result = SUCCESS;
 
 	uint8_t len = this->serialDef.stream->readBytes((uint8_t *) structureManaged, size_);
-	if (len!=size_){
-		result = ERR_DATA_SIZE_NOT_MATCH;
-	}
-	if (result != SUCCESS) return result;
-
-	result = this->waitCompleteResponse(1000);
-	if (result != SUCCESS) return result;
 
 	DEBUG_PRINT("Available buffer: ");
 	DEBUG_PRINT(len);
 	DEBUG_PRINT(" structure size: ");
 	DEBUG_PRINTLN(size_);
+
+	if (len!=size_){
+		if (len==0){
+			result = ERR_NO_RESPONSE_FROM_DEVICE;
+		}else{
+			result = ERR_DATA_SIZE_NOT_MATCH;
+		}
+	}
+	if (result != SUCCESS) return result;
+
+	result = this->waitCompleteResponse(1000);
+	if (result != SUCCESS) return result;
 
 	return result;
 }
@@ -506,9 +516,13 @@ void LoRa_E32::writeProgramCommand(PROGRAM_COMMAND cmd){
 }
 
 ResponseStructContainer LoRa_E32::getConfiguration(){
+	ResponseStructContainer rc;
+
+	rc.status.code = checkUARTConfiguration(MODE_3_PROGRAM);
+	if (rc.status.code!=SUCCESS) return rc;
+
 	MODE_TYPE prevMode = this->mode;
 
-	ResponseStructContainer rc;
 	rc.status.code = this->setMode(MODE_3_PROGRAM);
 	if (rc.status.code!=SUCCESS) return rc;
 
@@ -516,7 +530,10 @@ ResponseStructContainer LoRa_E32::getConfiguration(){
 
 	rc.data = malloc(sizeof(Configuration));
 	rc.status.code = this->receiveStruct((uint8_t *)rc.data, sizeof(Configuration));
-	if (rc.status.code!=SUCCESS) return rc;
+	if (rc.status.code!=SUCCESS) {
+		this->setMode(prevMode);
+		return rc;
+	}
 
 	DEBUG_PRINTLN("----------------------------------------");
 	DEBUG_PRINT(F("HEAD BIN INSIDE: "));  DEBUG_PRINT(((Configuration *)rc.data)->HEAD, BIN);DEBUG_PRINT(" ");DEBUG_PRINT(((Configuration *)rc.data)->HEAD, DEC);DEBUG_PRINT(" ");DEBUG_PRINTLN(((Configuration *)rc.data)->HEAD, HEX);
@@ -535,10 +552,21 @@ ResponseStructContainer LoRa_E32::getConfiguration(){
 	return rc;
 }
 
+RESPONSE_STATUS LoRa_E32::checkUARTConfiguration(MODE_TYPE mode){
+	if (mode==MODE_3_PROGRAM && this->bpsRate!=UART_BPS_RATE_9600){
+		return ERR_WRONG_UART_CONFIG;
+	}
+	return SUCCESS;
+}
+
 ResponseStatus LoRa_E32::setConfiguration(Configuration configuration, PROGRAM_COMMAND saveType){
+	ResponseStatus rc;
+
+	rc.code = checkUARTConfiguration(MODE_3_PROGRAM);
+	if (rc.code!=SUCCESS) return rc;
+
 	MODE_TYPE prevMode = this->mode;
 
-	ResponseStatus rc;
 	rc.code = this->setMode(MODE_3_PROGRAM);
 	if (rc.code!=SUCCESS) return rc;
 
@@ -547,7 +575,10 @@ ResponseStatus LoRa_E32::setConfiguration(Configuration configuration, PROGRAM_C
 	configuration.HEAD = saveType;
 
 	rc.code = this->sendStruct((uint8_t *)&configuration, sizeof(Configuration));
-	if (rc.code!=SUCCESS) return rc;
+	if (rc.code!=SUCCESS) {
+		this->setMode(prevMode);
+		return rc;
+	}
 
 	DEBUG_PRINTLN("----------------------------------------");
 	DEBUG_PRINT(F("HEAD BIN INSIDE: "));  DEBUG_PRINT(configuration.HEAD, BIN);DEBUG_PRINT(" ");DEBUG_PRINT(configuration.HEAD, DEC);DEBUG_PRINT(" ");DEBUG_PRINTLN(configuration.HEAD, HEX);
@@ -566,9 +597,13 @@ ResponseStatus LoRa_E32::setConfiguration(Configuration configuration, PROGRAM_C
 }
 
 ResponseStructContainer LoRa_E32::getModuleInformation(){
+	ResponseStructContainer rc;
+
+	rc.status.code = checkUARTConfiguration(MODE_3_PROGRAM);
+	if (rc.status.code!=SUCCESS) return rc;
+
 	MODE_TYPE prevMode = this->mode;
 
-	ResponseStructContainer rc;
 	rc.status.code = this->setMode(MODE_3_PROGRAM);
 	if (rc.status.code!=SUCCESS) return rc;
 
@@ -577,6 +612,7 @@ ResponseStructContainer LoRa_E32::getModuleInformation(){
 	struct ModuleInformation *moduleInformation = (ModuleInformation *)malloc(sizeof(ModuleInformation));
 	rc.status.code = this->receiveStruct((uint8_t *)moduleInformation, sizeof(ModuleInformation));
 	if (rc.status.code!=SUCCESS) {
+		this->setMode(prevMode);
 		return rc;
 	}
 
@@ -604,16 +640,23 @@ ResponseStructContainer LoRa_E32::getModuleInformation(){
 
 
 ResponseStatus LoRa_E32::resetModule(){
+	ResponseStatus status;
+
+	status.code = checkUARTConfiguration(MODE_3_PROGRAM);
+	if (status.code!=SUCCESS) return status;
+
 	MODE_TYPE prevMode = this->mode;
 
-	ResponseStatus status;
 	status.code = this->setMode(MODE_3_PROGRAM);
 	if (status.code!=SUCCESS) return status;
 
 	this->writeProgramCommand(WRITE_RESET_MODULE);
 
 	status.code = this->waitCompleteResponse(1000);
-	if (status.code!=SUCCESS) return status;
+	if (status.code!=SUCCESS)  {
+		this->setMode(prevMode);
+		return status;
+	}
 
 
 	status.code = this->setMode(prevMode);
@@ -773,7 +816,11 @@ ResponseContainer LoRa_E32::receiveInitialMessage(uint8_t size){
 	char buff[size];
 	uint8_t len = this->serialDef.stream->readBytes(buff, size);
 	if (len!=size) {
-		rc.status.code = ERR_DATA_SIZE_NOT_MATCH;
+		if (len==0){
+			rc.status.code = ERR_NO_RESPONSE_FROM_DEVICE;
+		}else{
+			rc.status.code = ERR_DATA_SIZE_NOT_MATCH;
+		}
 		return rc;
 	}
 

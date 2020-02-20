@@ -27,7 +27,9 @@ typedef enum RESPONSE_STATUS {
   ERR_BUF_TOO_SMALL,
   ERR_TIMEOUT,
   ERR_HARDWARE,
-  ERR_HEAD_NOT_RECOGNIZED
+  ERR_HEAD_NOT_RECOGNIZED,
+  ERR_NO_RESPONSE_FROM_DEVICE,
+  ERR_WRONG_UART_CONFIG
 } Status;
 
 static String getResponseDescriptionByParams(byte status){
@@ -65,6 +67,12 @@ static String getResponseDescriptionByParams(byte status){
 		break;
 	  case ERR_HEAD_NOT_RECOGNIZED:
 		return F("Save mode returned not recognized!");
+		break;
+	  case ERR_NO_RESPONSE_FROM_DEVICE:
+		return F("No response from device! (Check wiring)");
+		break;
+	  case ERR_WRONG_UART_CONFIG:
+		return F("Wrong UART configuration! (BPS must be 9600 for configuration)");
 		break;
 	  default:
 		return F("Invalid status!");
