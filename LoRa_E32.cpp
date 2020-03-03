@@ -396,6 +396,10 @@ Status LoRa_E32::sendStruct(void *structureManaged, uint16_t size_) {
 
 		uint8_t len = this->serialDef.stream->write((uint8_t *) structureManaged, size_);
 		if (len!=size_){
+			DEBUG_PRINT(F("Send... len:"))
+			DEBUG_PRINT(len);
+			DEBUG_PRINT(F(" size:"))
+			DEBUG_PRINT(size_);
 			if (len==0){
 				result = ERR_NO_RESPONSE_FROM_DEVICE;
 			}else{
@@ -530,6 +534,11 @@ ResponseStructContainer LoRa_E32::getConfiguration(){
 
 	rc.data = malloc(sizeof(Configuration));
 	rc.status.code = this->receiveStruct((uint8_t *)rc.data, sizeof(Configuration));
+
+#ifdef LoRa_E32_DEBUG
+	 this->printParameters((Configuration *)rc.data);
+#endif
+
 	if (rc.status.code!=SUCCESS) {
 		this->setMode(prevMode);
 		return rc;
@@ -872,4 +881,26 @@ unsigned long LoRa_E32::decrypt(unsigned long data)
   }
   return x;
  }
+#ifdef LoRa_E32_DEBUG
+void LoRa_E32::printParameters(struct Configuration *configuration) {
+	DEBUG_PRINTLN("----------------------------------------");
 
+	DEBUG_PRINT(F("HEAD : "));  DEBUG_PRINT(configuration->HEAD, BIN);DEBUG_PRINT(" ");DEBUG_PRINT(configuration->HEAD, DEC);DEBUG_PRINT(" ");DEBUG_PRINTLN(configuration->HEAD, HEX);
+	DEBUG_PRINTLN(F(" "));
+	DEBUG_PRINT(F("AddH : "));  DEBUG_PRINTLN(configuration->ADDH, DEC);
+	DEBUG_PRINT(F("AddL : "));  DEBUG_PRINTLN(configuration->ADDL, DEC);
+	DEBUG_PRINT(F("Chan : "));  DEBUG_PRINT(configuration->CHAN, DEC); DEBUG_PRINT(" -> "); DEBUG_PRINTLN(configuration->getChannelDescription());
+	DEBUG_PRINTLN(F(" "));
+	DEBUG_PRINT(F("SpeedParityBit     : "));  DEBUG_PRINT(configuration->SPED.uartParity, BIN);DEBUG_PRINT(" -> "); DEBUG_PRINTLN(configuration->SPED.getUARTParityDescription());
+	DEBUG_PRINT(F("SpeedUARTDatte  : "));  DEBUG_PRINT(configuration->SPED.uartBaudRate, BIN);DEBUG_PRINT(" -> "); DEBUG_PRINTLN(configuration->SPED.getUARTBaudRate());
+	DEBUG_PRINT(F("SpeedAirDataRate   : "));  DEBUG_PRINT(configuration->SPED.airDataRate, BIN);DEBUG_PRINT(" -> "); DEBUG_PRINTLN(configuration->SPED.getAirDataRate());
+
+	DEBUG_PRINT(F("OptionTrans        : "));  DEBUG_PRINT(configuration->OPTION.fixedTransmission, BIN);DEBUG_PRINT(" -> "); DEBUG_PRINTLN(configuration->OPTION.getFixedTransmissionDescription());
+	DEBUG_PRINT(F("OptionPullup       : "));  DEBUG_PRINT(configuration->OPTION.ioDriveMode, BIN);DEBUG_PRINT(" -> "); DEBUG_PRINTLN(configuration->OPTION.getIODroveModeDescription());
+	DEBUG_PRINT(F("OptionWakeup       : "));  DEBUG_PRINT(configuration->OPTION.wirelessWakeupTime, BIN);DEBUG_PRINT(" -> "); DEBUG_PRINTLN(configuration->OPTION.getWirelessWakeUPTimeDescription());
+	DEBUG_PRINT(F("OptionFEC          : "));  DEBUG_PRINT(configuration->OPTION.fec, BIN);DEBUG_PRINT(" -> "); DEBUG_PRINTLN(configuration->OPTION.getFECDescription());
+	DEBUG_PRINT(F("OptionPower        : "));  DEBUG_PRINT(configuration->OPTION.transmissionPower, BIN);DEBUG_PRINT(" -> "); DEBUG_PRINTLN(configuration->OPTION.getTransmissionPowerDescription());
+
+	DEBUG_PRINTLN("----------------------------------------");
+}
+#endif

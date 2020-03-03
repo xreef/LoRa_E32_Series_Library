@@ -69,7 +69,6 @@ void loop()
 {
 	delay(2000);
 
-	// ResponseStatus LoRa_E32::sendFixedMessage(byte ADDL, byte ADDH, byte CHAN, const String message)
 	Serial.println("Send message to 00 03 04");
 	ResponseStatus rs = e32ttl.sendFixedMessage(0, 3, 0x04, "Message to 00 03 04 device");
 	Serial.println(rs.getResponseDescription());

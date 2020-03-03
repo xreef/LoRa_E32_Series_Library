@@ -210,7 +210,6 @@ class LoRa_E32 {
 		ResponseStatus setConfiguration(Configuration configuration, PROGRAM_COMMAND saveType = WRITE_CFG_PWR_DWN_LOSE);
 
 		ResponseStructContainer getModuleInformation();
-        void printParameters(struct Configuration configuration);
         ResponseStatus resetModule();
 
         ResponseStatus sendMessage(const void *message, const uint8_t size);
@@ -219,10 +218,10 @@ class LoRa_E32 {
         ResponseStatus sendMessage(const String message);
         ResponseContainer receiveMessage();
 
-        ResponseStatus sendFixedMessage(byte ADDL, byte ADDH, byte CHAN, const String message);
+        ResponseStatus sendFixedMessage(byte ADDH,byte ADDL, byte CHAN, const String message);
         ResponseStatus sendBroadcastFixedMessage(byte CHAN, const String message);
 
-        ResponseStatus sendFixedMessage(byte ADDL, byte ADDH, byte CHAN, const void *message, const uint8_t size);
+        ResponseStatus sendFixedMessage(byte ADDH,byte ADDL, byte CHAN, const void *message, const uint8_t size);
         ResponseStatus sendBroadcastFixedMessage(byte CHAN, const void *message, const uint8_t size );
 
         ResponseContainer receiveInitialMessage(const uint8_t size);
@@ -310,6 +309,10 @@ class LoRa_E32 {
         void writeProgramCommand(PROGRAM_COMMAND cmd);
 
         RESPONSE_STATUS checkUARTConfiguration(MODE_TYPE mode);
+
+#ifdef LoRa_E32_DEBUG
+        void printParameters(struct Configuration *configuration);
+#endif
 };
 
 #endif

@@ -69,7 +69,6 @@ void loop()
 {
 	delay(2000);
 
-	// ResponseStatus LoRa_E32::sendFixedMessage(byte ADDL, byte ADDH, byte CHAN, const String message)
 	Serial.println("Broadcast message to channel 04");
 	ResponseStatus rs = e32ttl.sendBroadcastFixedMessage(0x04, "Broadcast message to channel 04");
 	Serial.println(rs.getResponseDescription());
