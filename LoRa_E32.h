@@ -28,12 +28,6 @@
 #ifndef LoRa_E32_h
 #define LoRa_E32_h
 
-#define M0_PIN	7
-#define M1_PIN	8
-#define AUX_PIN	A0
-#define SOFT_RX_PIN	10
-#define SOFT_TX_PIN 11
-
 #ifndef ESP32
 	#define ACTIVATE_SOFTWARE_SERIAL
 #endif
@@ -52,6 +46,8 @@
 #else
 #include "WProgram.h"
 #endif
+
+#define MAX_SIZE_TX_PACKET 58
 
 // Uncomment to enable printing out nice debug messages.
 // #define LoRa_E32_DEBUG
@@ -204,7 +200,8 @@ class LoRa_E32 {
 //		LoRa_E32(SoftwareSerial* serial, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600, MODE_TYPE mode = MODE_0_NORMAL);
 
 		bool begin();
-        Status setMode(uint8_t mode);
+        Status setMode(MODE_TYPE mode);
+        MODE_TYPE getMode();
 
 		ResponseStructContainer getConfiguration();
 		ResponseStatus setConfiguration(Configuration configuration, PROGRAM_COMMAND saveType = WRITE_CFG_PWR_DWN_LOSE);
@@ -236,16 +233,16 @@ class LoRa_E32 {
 
 		bool isSoftwareSerial = true;
 
-        byte rxPin = 0;
-        byte txPin = 0;
-        byte auxPin = 0;
+        int8_t rxPin = -1;
+        int8_t txPin = -1;
+        int8_t auxPin = -1;
 
 #ifdef HARDWARE_SERIAL_SELECTABLE_PIN
         uint32_t serialConfig = SERIAL_8N1;
 #endif
 
-        byte m0Pin = 0;
-        byte m1Pin = 0;
+        int8_t m0Pin = -1;
+        int8_t m1Pin = -1;
 
         unsigned long halfKeyloqKey = 0x06660708;
         unsigned long encrypt(unsigned long data);

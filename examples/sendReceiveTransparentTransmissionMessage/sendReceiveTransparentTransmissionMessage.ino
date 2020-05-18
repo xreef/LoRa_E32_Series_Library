@@ -6,8 +6,8 @@
  * E32-TTL-100----- Arduino UNO
  * M0         ----- GND
  * M1         ----- GND
- * RX         ----- PIN 2 (PullUP & Voltage divider)
- * TX         ----- PIN 3 (PullUP)
+ * TX         ----- PIN 2 (PullUP)
+ * RX         ----- PIN 3 (PullUP & Voltage divider)
  * AUX        ----- Not connected
  * VCC        ----- 3.3v/5v
  * GND        ----- GND

@@ -201,17 +201,17 @@ LoRa_E32::LoRa_E32(SoftwareSerial* serial, byte auxPin, byte m0Pin, byte m1Pin, 
 #endif
 
 bool LoRa_E32::begin(){
-	if (this->auxPin != 0) {
+	if (this->auxPin != -1) {
 		pinMode(this->auxPin, INPUT);
 		DEBUG_PRINTLN("Init AUX pin!");
 	}
-	if (this->m0Pin != 0) {
+	if (this->m0Pin != -1) {
 		pinMode(this->m0Pin, OUTPUT);
 		DEBUG_PRINTLN("Init M0 pin!");
 		digitalWrite(this->m0Pin, HIGH);
 
 	}
-	if (this->m1Pin != 0) {
+	if (this->m1Pin != -1) {
 		pinMode(this->m1Pin, OUTPUT);
 		DEBUG_PRINTLN("Init M1 pin!");
 		digitalWrite(this->m1Pin, HIGH);
@@ -232,6 +232,10 @@ bool LoRa_E32::begin(){
 #ifndef HARDWARE_SERIAL_SELECTABLE_PIN
         this->serialDef.begin(*this->hs, this->bpsRate);
 #endif
+        while (!this->hs) {
+          ; // wait for serial port to connect. Needed for native USB
+        }
+
 #ifdef ACTIVATE_SOFTWARE_SERIAL
     }else if (this->ss){
         DEBUG_PRINTLN("Begin Software Serial");
@@ -277,7 +281,7 @@ Status LoRa_E32::waitCompleteResponse(unsigned long timeout, unsigned int waitNo
 
 	// if AUX pin was supplied and look for HIGH state
 	// note you can omit using AUX if no pins are available, but you will have to use delay() to let module finish
-	if (this->auxPin != 0) {
+	if (this->auxPin != -1) {
 		while (digitalRead(this->auxPin) == LOW) {
 			if ((millis() - t) > timeout){
 				result = ERR_TIMEOUT;
@@ -392,6 +396,10 @@ types each handle ints floats differently
 */
 
 Status LoRa_E32::sendStruct(void *structureManaged, uint16_t size_) {
+		if (size_ > MAX_SIZE_TX_PACKET){
+			return ERR_PACKET_TOO_BIG;
+		}
+
 		Status result = SUCCESS;
 
 		uint8_t len = this->serialDef.stream->write((uint8_t *) structureManaged, size_);
@@ -464,14 +472,14 @@ method to set the mode (program, normal, etc.)
 
 */
 
-Status LoRa_E32::setMode(uint8_t mode) {
+Status LoRa_E32::setMode(MODE_TYPE mode) {
 
 	// data sheet claims module needs some extra time after mode setting (2ms)
 	// most of my projects uses 10 ms, but 40ms is safer
 
 	this->managedDelay(40);
 
-	if (this->m0Pin == 0 && this->m1Pin == 0) {
+	if (this->m0Pin == -1 && this->m1Pin == -1) {
 		DEBUG_PRINTLN(F("The M0 and M1 pins is not set, this mean that you are connect directly the pins as you need!"))
 	}else{
 		switch (mode)
@@ -509,7 +517,15 @@ Status LoRa_E32::setMode(uint8_t mode) {
 	// wait until aux pin goes back low
 	Status res = this->waitCompleteResponse(1000);
 
+	if (res == SUCCESS){
+		this->mode = mode;
+	}
+
 	return res;
+}
+
+MODE_TYPE LoRa_E32::getMode(){
+	return this->mode;
 }
 
 void LoRa_E32::writeProgramCommand(PROGRAM_COMMAND cmd){

@@ -29,7 +29,8 @@ typedef enum RESPONSE_STATUS {
   ERR_HARDWARE,
   ERR_HEAD_NOT_RECOGNIZED,
   ERR_NO_RESPONSE_FROM_DEVICE,
-  ERR_WRONG_UART_CONFIG
+  ERR_WRONG_UART_CONFIG,
+  ERR_PACKET_TOO_BIG
 } Status;
 
 static String getResponseDescriptionByParams(byte status){
@@ -73,6 +74,9 @@ static String getResponseDescriptionByParams(byte status){
 		break;
 	  case ERR_WRONG_UART_CONFIG:
 		return F("Wrong UART configuration! (BPS must be 9600 for configuration)");
+		break;
+	  case ERR_PACKET_TOO_BIG:
+		return F("The device support only 58byte of data transmission!");
 		break;
 	  default:
 		return F("Invalid status!");

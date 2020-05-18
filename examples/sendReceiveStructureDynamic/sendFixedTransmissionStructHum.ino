@@ -6,8 +6,8 @@
  * E32-TTL-100----- Arduino UNO or esp8266
  * M0         ----- 3.3v (To config) GND (To send) 7 (To dinamically manage)
  * M1         ----- 3.3v (To config) GND (To send) 6 (To dinamically manage)
- * RX         ----- PIN 2 (PullUP & Voltage divider)
- * TX         ----- PIN 3 (PullUP)
+ * TX         ----- PIN 2 (PullUP)
+ * RX         ----- PIN 3 (PullUP & Voltage divider)
  * AUX        ----- Not connected (5 if you connect)
  * VCC        ----- 3.3v/5v
  * GND        ----- GND
