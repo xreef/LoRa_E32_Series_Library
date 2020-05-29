@@ -1,4 +1,12 @@
-﻿# A complete tutorial on my site www.mischianti.org
+﻿<a href="https://www.mischianti.org/forum/forum/lora-e32-library-arduino-esp32-and-esp8266/"><img
+  src="https://github.com/xreef/LoRa_E32_Series_Library/raw/master/resources/mischaintiForumSupport.png" alt="Support forum e32 English"
+   align="right"></a>
+
+<a href="https://www.mischianti.org/forum/forum/libreria-lora-e32-per-arduino-esp32-e-esp8266/"><img
+  src="https://github.com/xreef/LoRa_E32_Series_Library/raw/master/resources/buttonSupportoForum.png" alt="Forum supporto e32 italiano"
+  align="right"></a>
+
+# A complete tutorial on my site www.mischianti.org
 
 1.  [LoRa E32 device for Arduino, esp32 or esp8266: settings and basic usage](https://www.mischianti.org/2019/10/15/lora-e32-device-for-arduino-esp32-or-esp8266-specs-and-basic-usage-part-1/)
 2.  [LoRa E32 device for Arduino, esp32 or esp8266: library](https://www.mischianti.org/2019/10/21/lora-e32-device-for-arduino-esp32-or-esp8266-library-part-2/)
