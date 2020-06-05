@@ -1,10 +1,10 @@
 ﻿<div>
-<a href="https://www.mischianti.org/forums/forum/english-support-forum/mischiantis-libraries/ebyte-lora-e32-uart-devices/"><img
+<a href="https://www.mischianti.org/forums/forum/mischiantis-libraries/ebyte-lora-e32-uart-devices/"><img
   src="https://github.com/xreef/LoRa_E32_Series_Library/raw/master/resources/buttonSupportForumEnglish.png" alt="Support forum EByte e32 English"
    align="right"></a>
 </div>
 <div>
-<a href="https://www.mischianti.org/forums/forum/forum-di-supporto-in-italiano/le-librerie-di-mischianti/ebyte-e32-dispositivi-lora-uart/"><img
+<a href="https://www.mischianti.org/it/forums/forum/le-librerie-di-mischianti/ebyte-e32-dispositivi-lora-uart/"><img
   src="https://github.com/xreef/LoRa_E32_Series_Library/raw/master/resources/buttonSupportForumItaliano.png" alt="Forum supporto EByte e32 italiano"
   align="right"></a>
 </div>
