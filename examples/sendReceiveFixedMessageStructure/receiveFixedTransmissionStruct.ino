@@ -6,8 +6,8 @@
  * E32-TTL-100----- Arduino UNO or esp8266
  * M0         ----- 3.3v (To config) GND (To send) 7 (To dinamically manage)
  * M1         ----- 3.3v (To config) GND (To send) 6 (To dinamically manage)
- * TX         ----- PIN 2 (PullUP)
- * RX         ----- PIN 3 (PullUP & Voltage divider)
+ * TX         ----- RX PIN 2 (PullUP)
+ * RX         ----- TX PIN 3 (PullUP & Voltage divider)
  * AUX        ----- Not connected (5 if you connect)
  * VCC        ----- 3.3v/5v
  * GND        ----- GND
@@ -21,7 +21,7 @@
 //LoRa_E32 e32ttl(D2, D3); // Config without connect AUX and M0 M1
 
 //#include <SoftwareSerial.h>
-//SoftwareSerial mySerial(D2, D3); // RX, TX
+//SoftwareSerial mySerial(D2, D3); // Arduino RX <-- e32 TX, Arduino TX --> e32 RX
 //LoRa_E32 e32ttl(&mySerial, D5, D7, D6);
 // -------------------------------------
 
@@ -30,7 +30,7 @@
 LoRa_E32 e32ttl(2, 3, 4); // Config without connect AUX and M0 M1
 
 //#include <SoftwareSerial.h>
-//SoftwareSerial mySerial(2, 3); // RX, TX
+//SoftwareSerial mySerial(2, 3); // Arduino RX <-- e32 TX, Arduino TX --> e32 RX
 //LoRa_E32 e32ttl(&mySerial, 5, 7, 6);
 // -------------------------------------
 void printParameters(struct Configuration configuration);

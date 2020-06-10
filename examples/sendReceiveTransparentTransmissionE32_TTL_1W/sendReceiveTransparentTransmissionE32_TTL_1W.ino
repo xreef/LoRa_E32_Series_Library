@@ -3,7 +3,7 @@
 
 #include "LoRa_E32.h"
 
-SoftwareSerial mySerial(4, 5);
+SoftwareSerial mySerial(4, 5);  // e32 TX e32 RX
 LoRa_E32 e32ttl100(&mySerial, 3, 7, 6);
 
 void printParameters(struct Configuration configuration) ;

@@ -3,12 +3,12 @@
  * Send fixed transmission message to a specified point.
  * https://www.mischianti.org
  *
- * E32-TTL-100----- Arduino UNO or esp8266
- * M0         ----- 3.3v (To config) 3.3v (To send) 7 (To dinamically manage)
- * M1         ----- 3.3v (To config) GND  (To send) 6 (To dinamically manage)
- * TX         ----- PIN 2 (PullUP)
- * RX         ----- PIN 3 (PullUP & Voltage divider)
- * AUX        ----- Not connected (5 if you connect)
+ * E32-TTL-100----- esp8266
+ * M0         ----- D7
+ * M1         ----- D6
+ * TX         ----- RX PIN D2 (PullUP)
+ * RX         ----- TX PIN D3 (PullUP)
+ * AUX        ----- D5
  * VCC        ----- 3.3v/5v
  * GND        ----- GND
  *
@@ -17,24 +17,9 @@
 #include "LoRa_E32.h"
 
 // ---------- esp8266 pins --------------
-//LoRa_E32 e32ttl(D2, D3, D5, D7, D6);
-//LoRa_E32 e32ttl(D2, D3, D5, D7, D6); // Config without connect AUX and M0 M1
 #include <SoftwareSerial.h>
-SoftwareSerial mySerial(D2, D3); // RX, TX
+SoftwareSerial mySerial(D2, D3); // RX <-- e32 TX, TX --> e32 RX
 LoRa_E32 e32ttl(&mySerial, D5, D7, D6);
-
-//#include <SoftwareSerial.h>
-//SoftwareSerial mySerial(D2, D3); // RX, TX
-//LoRa_E32 e32ttl(&mySerial, D5, D7, D6);
-// -------------------------------------
-
-// ---------- Arduino pins --------------
-//LoRa_E32 e32ttl(2, 3, 5, 7, 6);
-//LoRa_E32 e32ttl(2, 3); // Config without connect AUX and M0 M1
-
-//#include <SoftwareSerial.h>
-//SoftwareSerial mySerial(2, 3); // RX, TX
-//LoRa_E32 e32ttl(&mySerial, 5, 7, 6);
 // -------------------------------------
 
 void printParameters(struct Configuration configuration);

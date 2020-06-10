@@ -28,35 +28,35 @@
 #include "LoRa_E32.h"
 
 #ifdef ACTIVATE_SOFTWARE_SERIAL
-LoRa_E32::LoRa_E32(byte rxPin, byte txPin, UART_BPS_RATE bpsRate){
-    this->rxPin = rxPin;
-    this->txPin = txPin;
-    SoftwareSerial* mySerial = new SoftwareSerial((uint8_t)this->rxPin, (uint8_t)this->txPin); // "RX TX" // @suppress("Abstract class cannot be instantiated")
+LoRa_E32::LoRa_E32(byte txE32pin, byte rxE32pin, UART_BPS_RATE bpsRate){
+    this->txE32pin = txE32pin;
+    this->rxE32pin = rxE32pin;
+    SoftwareSerial* mySerial = new SoftwareSerial((uint8_t)this->txE32pin, (uint8_t)this->rxE32pin); // "RX TX" // @suppress("Abstract class cannot be instantiated")
     this->ss = mySerial;
     this->hs = NULL;
 
     this->bpsRate = bpsRate;
 }
-LoRa_E32::LoRa_E32(byte rxPin, byte txPin, byte auxPin, UART_BPS_RATE bpsRate){
-    this->rxPin = rxPin;
-    this->txPin = txPin;
+LoRa_E32::LoRa_E32(byte txE32pin, byte rxE32pin, byte auxPin, UART_BPS_RATE bpsRate){
+    this->txE32pin = txE32pin;
+    this->rxE32pin = rxE32pin;
     this->auxPin = auxPin;
-    SoftwareSerial* mySerial = new SoftwareSerial((uint8_t)this->rxPin, (uint8_t)this->txPin); // "RX TX" // @suppress("Abstract class cannot be instantiated")
+    SoftwareSerial* mySerial = new SoftwareSerial((uint8_t)this->txE32pin, (uint8_t)this->rxE32pin); // "RX TX" // @suppress("Abstract class cannot be instantiated")
     this->ss = mySerial;
     this->hs = NULL;
 
     this->bpsRate = bpsRate;
 }
-LoRa_E32::LoRa_E32(byte rxPin, byte txPin, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate){
-    this->rxPin = rxPin;
-    this->txPin = txPin;
+LoRa_E32::LoRa_E32(byte txE32pin, byte rxE32pin, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate){
+    this->txE32pin = txE32pin;
+    this->rxE32pin = rxE32pin;
 
     this->auxPin = auxPin;
 
     this->m0Pin = m0Pin;
     this->m1Pin = m1Pin;
 
-    SoftwareSerial* mySerial = new SoftwareSerial((uint8_t)this->rxPin, (uint8_t)this->txPin); // "RX TX" // @suppress("Abstract class cannot be instantiated")
+    SoftwareSerial* mySerial = new SoftwareSerial((uint8_t)this->txE32pin, (uint8_t)this->rxE32pin); // "RX TX" // @suppress("Abstract class cannot be instantiated")
     this->ss = mySerial;
     this->hs = NULL;
 
@@ -65,8 +65,8 @@ LoRa_E32::LoRa_E32(byte rxPin, byte txPin, byte auxPin, byte m0Pin, byte m1Pin, 
 #endif
 
 LoRa_E32::LoRa_E32(HardwareSerial* serial, UART_BPS_RATE bpsRate){ //, uint32_t serialConfig
-    this->rxPin = rxPin;
-    this->txPin = txPin;
+    this->txE32pin = txE32pin;
+    this->rxE32pin = rxE32pin;
 
 	#ifdef ACTIVATE_SOFTWARE_SERIAL
     	this->ss = NULL;
@@ -79,8 +79,8 @@ LoRa_E32::LoRa_E32(HardwareSerial* serial, UART_BPS_RATE bpsRate){ //, uint32_t 
     this->bpsRate = bpsRate;
 }
 LoRa_E32::LoRa_E32(HardwareSerial* serial, byte auxPin, UART_BPS_RATE bpsRate){ // , uint32_t serialConfig
-    this->rxPin = rxPin;
-    this->txPin = txPin;
+    this->txE32pin = txE32pin;
+    this->rxE32pin = rxE32pin;
     this->auxPin = auxPin;
 
 	#ifdef ACTIVATE_SOFTWARE_SERIAL
@@ -94,8 +94,8 @@ LoRa_E32::LoRa_E32(HardwareSerial* serial, byte auxPin, UART_BPS_RATE bpsRate){ 
     this->bpsRate = bpsRate;
 }
 LoRa_E32::LoRa_E32(HardwareSerial* serial, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate){ //, uint32_t serialConfig
-    this->rxPin = rxPin;
-    this->txPin = txPin;
+    this->txE32pin = txE32pin;
+    this->rxE32pin = rxE32pin;
 
     this->auxPin = auxPin;
 
@@ -113,9 +113,9 @@ LoRa_E32::LoRa_E32(HardwareSerial* serial, byte auxPin, byte m0Pin, byte m1Pin, 
 }
 
 #ifdef HARDWARE_SERIAL_SELECTABLE_PIN
-LoRa_E32::LoRa_E32(HardwareSerial* serial, byte rxPin, byte txPin, UART_BPS_RATE bpsRate, uint32_t serialConfig){
-    this->rxPin = rxPin;
-    this->txPin = txPin;
+LoRa_E32::LoRa_E32(HardwareSerial* serial, byte txE32pin, byte rxE32pin, UART_BPS_RATE bpsRate, uint32_t serialConfig){
+    this->txE32pin = txE32pin;
+    this->rxE32pin = rxE32pin;
 
 	#ifdef ACTIVATE_SOFTWARE_SERIAL
     	this->ss = NULL;
@@ -127,9 +127,9 @@ LoRa_E32::LoRa_E32(HardwareSerial* serial, byte rxPin, byte txPin, UART_BPS_RATE
 
     this->bpsRate = bpsRate;
 }
-LoRa_E32::LoRa_E32(HardwareSerial* serial, byte rxPin, byte txPin, byte auxPin, UART_BPS_RATE bpsRate, uint32_t serialConfig){
-    this->rxPin = rxPin;
-    this->txPin = txPin;
+LoRa_E32::LoRa_E32(HardwareSerial* serial, byte txE32pin, byte rxE32pin, byte auxPin, UART_BPS_RATE bpsRate, uint32_t serialConfig){
+    this->txE32pin = txE32pin;
+    this->rxE32pin = rxE32pin;
     this->auxPin = auxPin;
 
 	#ifdef ACTIVATE_SOFTWARE_SERIAL
@@ -142,9 +142,9 @@ LoRa_E32::LoRa_E32(HardwareSerial* serial, byte rxPin, byte txPin, byte auxPin, 
 
     this->bpsRate = bpsRate;
 }
-LoRa_E32::LoRa_E32(HardwareSerial* serial, byte rxPin, byte txPin, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate, uint32_t serialConfig){
-    this->rxPin = rxPin;
-    this->txPin = txPin;
+LoRa_E32::LoRa_E32(HardwareSerial* serial, byte txE32pin, byte rxE32pin, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate, uint32_t serialConfig){
+    this->txE32pin = txE32pin;
+    this->rxE32pin = rxE32pin;
 
     this->auxPin = auxPin;
 
@@ -166,8 +166,8 @@ LoRa_E32::LoRa_E32(HardwareSerial* serial, byte rxPin, byte txPin, byte auxPin, 
 #ifdef ACTIVATE_SOFTWARE_SERIAL
 
 LoRa_E32::LoRa_E32(SoftwareSerial* serial, UART_BPS_RATE bpsRate){
-    this->rxPin = rxPin;
-    this->txPin = txPin;
+    this->txE32pin = txE32pin;
+    this->rxE32pin = rxE32pin;
 
     this->ss = serial;
     this->hs = NULL;
@@ -175,8 +175,8 @@ LoRa_E32::LoRa_E32(SoftwareSerial* serial, UART_BPS_RATE bpsRate){
     this->bpsRate = bpsRate;
 }
 LoRa_E32::LoRa_E32(SoftwareSerial* serial, byte auxPin, UART_BPS_RATE bpsRate){
-    this->rxPin = rxPin;
-    this->txPin = txPin;
+    this->txE32pin = txE32pin;
+    this->rxE32pin = rxE32pin;
     this->auxPin = auxPin;
 
     this->ss = serial;
@@ -185,8 +185,8 @@ LoRa_E32::LoRa_E32(SoftwareSerial* serial, byte auxPin, UART_BPS_RATE bpsRate){
     this->bpsRate = bpsRate;
 }
 LoRa_E32::LoRa_E32(SoftwareSerial* serial, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate){
-    this->rxPin = rxPin;
-    this->txPin = txPin;
+    this->txE32pin = txE32pin;
+    this->rxE32pin = rxE32pin;
 
     this->auxPin = auxPin;
 
@@ -223,8 +223,8 @@ bool LoRa_E32::begin(){
         DEBUG_PRINTLN("Begin Hardware Serial");
 
 #ifdef HARDWARE_SERIAL_SELECTABLE_PIN
-        if(this->rxPin != 0 || this->txPin != 0) {
-			this->serialDef.begin(*this->hs, this->bpsRate, this->serialConfig, this->rxPin, this->txPin);
+        if(this->txE32pin != 0 || this->rxE32pin != 0) {
+			this->serialDef.begin(*this->hs, this->bpsRate, this->serialConfig, this->txE32pin, this->rxE32pin);
 		}else{
 			this->serialDef.begin(*this->hs, this->bpsRate, this->serialConfig);
 		}
@@ -243,14 +243,14 @@ bool LoRa_E32::begin(){
 		this->serialDef.begin(*this->ss, this->bpsRate);
 	}	else{
         DEBUG_PRINTLN("Begin Software Serial Pin");
-        SoftwareSerial* mySerial = new SoftwareSerial((int)this->rxPin, (int)this->txPin); // "RX TX" // @suppress("Abstract class cannot be instantiated")
+        SoftwareSerial* mySerial = new SoftwareSerial((int)this->txE32pin, (int)this->rxE32pin); // "RX TX" // @suppress("Abstract class cannot be instantiated")
         this->ss = mySerial;
 
-//		SoftwareSerial mySerial(this->rxPin, this->txPin);
+//		SoftwareSerial mySerial(this->txE32pin, this->rxE32pin);
         DEBUG_PRINT("RX Pin: ");
-        DEBUG_PRINT((int)this->rxPin);
+        DEBUG_PRINT((int)this->txE32pin);
         DEBUG_PRINT("TX Pin: ");
-        DEBUG_PRINTLN((int)this->txPin);
+        DEBUG_PRINTLN((int)this->rxE32pin);
 
 		this->serialDef.begin(*this->ss, this->bpsRate);
 #endif

@@ -180,9 +180,9 @@ struct ResponseContainer {
 class LoRa_E32 {
 	public:
 		#ifdef ACTIVATE_SOFTWARE_SERIAL
-			LoRa_E32(byte rxPin, byte txPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
-			LoRa_E32(byte rxPin, byte txPin, byte auxPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
-			LoRa_E32(byte rxPin, byte txPin, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
+			LoRa_E32(byte txE32pin, byte rxE32pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
+			LoRa_E32(byte txE32pin, byte rxE32pin, byte auxPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
+			LoRa_E32(byte txE32pin, byte rxE32pin, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
 		#endif
 
 		LoRa_E32(HardwareSerial* serial, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
@@ -190,9 +190,9 @@ class LoRa_E32 {
 		LoRa_E32(HardwareSerial* serial, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
 
 		#ifdef HARDWARE_SERIAL_SELECTABLE_PIN
-			LoRa_E32(HardwareSerial* serial, byte rxPin, byte txPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600, uint32_t serialConfig = SERIAL_8N1);
-			LoRa_E32(HardwareSerial* serial, byte rxPin, byte txPin, byte auxPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600, uint32_t serialConfig = SERIAL_8N1);
-			LoRa_E32(HardwareSerial* serial, byte rxPin, byte txPin, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600, uint32_t serialConfig = SERIAL_8N1);
+			LoRa_E32(HardwareSerial* serial, byte txE32pin, byte rxE32pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600, uint32_t serialConfig = SERIAL_8N1);
+			LoRa_E32(HardwareSerial* serial, byte txE32pin, byte rxE32pin, byte auxPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600, uint32_t serialConfig = SERIAL_8N1);
+			LoRa_E32(HardwareSerial* serial, byte txE32pin, byte rxE32pin, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600, uint32_t serialConfig = SERIAL_8N1);
 		#endif
 
 		#ifdef ACTIVATE_SOFTWARE_SERIAL
@@ -201,7 +201,7 @@ class LoRa_E32 {
 			LoRa_E32(SoftwareSerial* serial, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
 		#endif
 
-//		LoRa_E32(byte rxPin, byte txPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600, MODE_TYPE mode = MODE_0_NORMAL);
+//		LoRa_E32(byte txE32pin, byte rxE32pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600, MODE_TYPE mode = MODE_0_NORMAL);
 //		LoRa_E32(HardwareSerial* serial = &Serial, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600, MODE_TYPE mode = MODE_0_NORMAL);
 //		LoRa_E32(SoftwareSerial* serial, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600, MODE_TYPE mode = MODE_0_NORMAL);
 
@@ -239,8 +239,8 @@ class LoRa_E32 {
 
 		bool isSoftwareSerial = true;
 
-        int8_t rxPin = -1;
-        int8_t txPin = -1;
+        int8_t txE32pin = -1;
+        int8_t rxE32pin = -1;
         int8_t auxPin = -1;
 
 #ifdef HARDWARE_SERIAL_SELECTABLE_PIN
@@ -283,10 +283,10 @@ class LoRa_E32 {
 		  }
 
 		  template< typename T >
-		  void begin( T &t, int baud, uint32_t config, int8_t rxPin, int8_t txPin ){
+		  void begin( T &t, int baud, uint32_t config, int8_t txE32pin, int8_t rxE32pin ){
 			  DEBUG_PRINTLN("Begin ");
 			  t.setTimeout(500);
-			  t.begin(baud, config, rxPin, txPin);
+			  t.begin(baud, config, txE32pin, rxE32pin);
 			  stream = &t;
 		  }
 #endif

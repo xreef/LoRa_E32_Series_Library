@@ -16,7 +16,7 @@
 #include "Arduino.h"
 #include "LoRa_E32.h"
 
-LoRa_E32 e32ttl100(2, 3); // RX, TX
+LoRa_E32 e32ttl100(2, 3); // e32 TX e32 RX
 void printParameters(struct Configuration configuration);
 void printModuleInformation(struct ModuleInformation moduleInformation);
 

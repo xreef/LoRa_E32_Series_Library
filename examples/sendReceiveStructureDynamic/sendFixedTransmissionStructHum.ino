@@ -20,11 +20,11 @@
 //LoRa_E32 e32ttl(D2, D3, D5, D7, D6);
 //LoRa_E32 e32ttl(D2, D3, D5, D7, D6); // Config without connect AUX and M0 M1
 #include <SoftwareSerial.h>
-SoftwareSerial mySerial(D2, D3); // RX, TX
+SoftwareSerial mySerial(D2, D3); // e32 TX e32 RX
 LoRa_E32 e32ttl(&mySerial, D5, D7, D6);
 
 //#include <SoftwareSerial.h>
-//SoftwareSerial mySerial(D2, D3); // RX, TX
+//SoftwareSerial mySerial(D2, D3); // e32 TX e32 RX
 //LoRa_E32 e32ttl(&mySerial, D5, D7, D6);
 // -------------------------------------
 
@@ -33,7 +33,7 @@ LoRa_E32 e32ttl(&mySerial, D5, D7, D6);
 //LoRa_E32 e32ttl(2, 3); // Config without connect AUX and M0 M1
 
 //#include <SoftwareSerial.h>
-//SoftwareSerial mySerial(2, 3); // RX, TX
+//SoftwareSerial mySerial(2, 3); // e32 TX e32 RX
 //LoRa_E32 e32ttl(&mySerial, 5, 7, 6);
 // -------------------------------------
 

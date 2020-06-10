@@ -6,8 +6,8 @@
  * E32-TTL-100----- Arduino UNO
  * M0         ----- 3.3v
  * M1         ----- 3.3v
- * TX         ----- PIN 2 (PullUP)
- * RX         ----- PIN 3 (PullUP & Voltage divider)
+ * TX         ----- RX PIN 2 (PullUP)
+ * RX         ----- TX PIN 3 (PullUP & Voltage divider)
  * AUX        ----- Not connected
  * VCC        ----- 3.3v/5v
  * GND        ----- GND
@@ -16,7 +16,7 @@
 #include "Arduino.h"
 #include "LoRa_E32.h"
 
-LoRa_E32 e32ttl100(2, 3); // RX, TX
+LoRa_E32 e32ttl100(2, 3); // Arduino RX <-- e32 TX, Arduino TX --> e32 RX
 void printParameters(struct Configuration configuration);
 void printModuleInformation(struct ModuleInformation moduleInformation);
 
