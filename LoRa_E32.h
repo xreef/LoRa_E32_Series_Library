@@ -190,9 +190,9 @@ class LoRa_E32 {
 		LoRa_E32(HardwareSerial* serial, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
 
 		#ifdef HARDWARE_SERIAL_SELECTABLE_PIN
-			LoRa_E32(HardwareSerial* serial, byte txE32pin, byte rxE32pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600, uint32_t serialConfig = SERIAL_8N1);
-			LoRa_E32(HardwareSerial* serial, byte txE32pin, byte rxE32pin, byte auxPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600, uint32_t serialConfig = SERIAL_8N1);
-			LoRa_E32(HardwareSerial* serial, byte txE32pin, byte rxE32pin, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600, uint32_t serialConfig = SERIAL_8N1);
+			LoRa_E32(byte txE32pin, byte rxE32pin, HardwareSerial* serial, UART_BPS_RATE bpsRate, uint32_t serialConfig = SERIAL_8N1);
+			LoRa_E32(byte txE32pin, byte rxE32pin, HardwareSerial* serial, byte auxPin, UART_BPS_RATE bpsRate, uint32_t serialConfig = SERIAL_8N1);
+			LoRa_E32(byte txE32pin, byte rxE32pin, HardwareSerial* serial, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate, uint32_t serialConfig = SERIAL_8N1);
 		#endif
 
 		#ifdef ACTIVATE_SOFTWARE_SERIAL
@@ -228,6 +228,7 @@ class LoRa_E32 {
         ResponseStatus sendBroadcastFixedMessage(byte CHAN, const void *message, const uint8_t size );
 
         ResponseContainer receiveInitialMessage(const uint8_t size);
+        ResponseContainer receiveMessageUntil(char delimiter = '\0');
 
         int available(unsigned long timeout = 1000);
 	private:

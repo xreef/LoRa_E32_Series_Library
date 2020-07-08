@@ -113,7 +113,7 @@ LoRa_E32::LoRa_E32(HardwareSerial* serial, byte auxPin, byte m0Pin, byte m1Pin, 
 }
 
 #ifdef HARDWARE_SERIAL_SELECTABLE_PIN
-LoRa_E32::LoRa_E32(HardwareSerial* serial, byte txE32pin, byte rxE32pin, UART_BPS_RATE bpsRate, uint32_t serialConfig){
+LoRa_E32::LoRa_E32(byte txE32pin, byte rxE32pin, HardwareSerial* serial, UART_BPS_RATE bpsRate, uint32_t serialConfig){
     this->txE32pin = txE32pin;
     this->rxE32pin = rxE32pin;
 
@@ -127,7 +127,7 @@ LoRa_E32::LoRa_E32(HardwareSerial* serial, byte txE32pin, byte rxE32pin, UART_BP
 
     this->bpsRate = bpsRate;
 }
-LoRa_E32::LoRa_E32(HardwareSerial* serial, byte txE32pin, byte rxE32pin, byte auxPin, UART_BPS_RATE bpsRate, uint32_t serialConfig){
+LoRa_E32::LoRa_E32(byte txE32pin, byte rxE32pin, HardwareSerial* serial, byte auxPin, UART_BPS_RATE bpsRate, uint32_t serialConfig){
     this->txE32pin = txE32pin;
     this->rxE32pin = rxE32pin;
     this->auxPin = auxPin;
@@ -142,7 +142,7 @@ LoRa_E32::LoRa_E32(HardwareSerial* serial, byte txE32pin, byte rxE32pin, byte au
 
     this->bpsRate = bpsRate;
 }
-LoRa_E32::LoRa_E32(HardwareSerial* serial, byte txE32pin, byte rxE32pin, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate, uint32_t serialConfig){
+LoRa_E32::LoRa_E32(byte txE32pin, byte rxE32pin, HardwareSerial* serial, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate, uint32_t serialConfig){
     this->txE32pin = txE32pin;
     this->rxE32pin = rxE32pin;
 
@@ -223,7 +223,7 @@ bool LoRa_E32::begin(){
         DEBUG_PRINTLN("Begin Hardware Serial");
 
 #ifdef HARDWARE_SERIAL_SELECTABLE_PIN
-        if(this->txE32pin != 0 || this->rxE32pin != 0) {
+        if(this->txE32pin != -1 && this->rxE32pin != -1) {
 			this->serialDef.begin(*this->hs, this->bpsRate, this->serialConfig, this->txE32pin, this->rxE32pin);
 		}else{
 			this->serialDef.begin(*this->hs, this->bpsRate, this->serialConfig);
@@ -695,6 +695,19 @@ ResponseContainer LoRa_E32::receiveMessage(){
 	rc.status.code = SUCCESS;
 	rc.data = this->serialDef.stream->readString();
 	this->cleanUARTBuffer();
+	if (rc.status.code!=SUCCESS) {
+		return rc;
+	}
+
+//	rc.data = message; // malloc(sizeof (moduleInformation));
+
+	return rc;
+}
+ResponseContainer LoRa_E32::receiveMessageUntil(char delimiter){
+	ResponseContainer rc;
+	rc.status.code = SUCCESS;
+	rc.data = this->serialDef.stream->readStringUntil(delimiter);
+//	this->cleanUARTBuffer();
 	if (rc.status.code!=SUCCESS) {
 		return rc;
 	}

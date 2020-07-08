@@ -9,6 +9,7 @@
   align="right"></a>
 </div>
 
+##Breaking change on esp32 constructor for managed HardwareSerial pins, now reference of HardwareSerial is after the pins to remove ambiguous constructors.
 
 # A complete tutorial on my site www.mischianti.org
 
