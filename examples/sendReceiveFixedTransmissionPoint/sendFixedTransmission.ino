@@ -61,6 +61,7 @@ void setup()
 //	configuration.OPTION.fixedTransmission = FT_FIXED_TRANSMISSION;
 //	e32ttl.setConfiguration(configuration, WRITE_CFG_PWR_DWN_SAVE);
 //	printParameters(configuration);
+//	c.close();
 	// ---------------------------
 }
 

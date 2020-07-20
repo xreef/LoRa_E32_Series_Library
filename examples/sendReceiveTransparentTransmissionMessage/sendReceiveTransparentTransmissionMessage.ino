@@ -49,7 +49,7 @@ void setup() {
 //	configuration.CHAN = 0x17;
 //	configuration.OPTION.fixedTransmission = FT_TRANSPARENT_TRANSMISSION;
 //	e32ttl100.setConfiguration(configuration, WRITE_CFG_PWR_DWN_SAVE);
-
+//  c.close();
   Serial.println("Hi, I'm going to send message!");
 
   // Send message

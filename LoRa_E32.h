@@ -56,7 +56,7 @@
 #define MAX_SIZE_TX_PACKET 58
 
 // Uncomment to enable printing out nice debug messages.
-// #define LoRa_E32_DEBUG
+ #define LoRa_E32_DEBUG
 
 // Define where debug output will be printed.
 #define DEBUG_PRINTER Serial
@@ -164,6 +164,9 @@ struct ResponseStatus {
 struct ResponseStructContainer {
 	void *data;
 	ResponseStatus status;
+	void close() {
+		free(this->data);
+	}
 };
 struct ResponseContainer {
 	String data;

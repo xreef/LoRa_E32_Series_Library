@@ -49,6 +49,7 @@ void setup()
 
 	e32ttl.setConfiguration(configuration, WRITE_CFG_PWR_DWN_SAVE);
 	printParameters(configuration);
+	c.close();
 	// ---------------------------
 	Serial.println();
 	Serial.println("Start listening!");

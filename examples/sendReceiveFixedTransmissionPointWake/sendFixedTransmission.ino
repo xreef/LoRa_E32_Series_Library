@@ -48,6 +48,7 @@ void setup()
 	configuration.OPTION.wirelessWakeupTime = WAKE_UP_2000;
 	e32ttl.setConfiguration(configuration, WRITE_CFG_PWR_DWN_SAVE);
 	printParameters(configuration);
+	c.close();
 	// ---------------------------
 }
 

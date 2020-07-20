@@ -54,7 +54,7 @@ void setup() {
 	Serial.println(rs.getResponseDescription());
 	Serial.println(rs.code);
 	printParameters(configuration);
-
+	c.close();
 }
 
 void loop() {

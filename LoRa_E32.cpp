@@ -726,8 +726,6 @@ ResponseStructContainer LoRa_E32::receiveMessage(const uint8_t size){
 		return rc;
 	}
 
-//	rc.data = message; // malloc(sizeof (moduleInformation));
-
 	return rc;
 }
 
@@ -751,7 +749,6 @@ ResponseStatus LoRa_E32::sendMessage(const String message){
 	status.code = this->sendStruct((uint8_t *)&messageFixed, size);
 	if (status.code!=SUCCESS) return status;
 
-//	free(messageFixed);
 	return status;
 }
 
@@ -838,9 +835,10 @@ ResponseStatus LoRa_E32::sendFixedMessage( byte ADDH,byte ADDL, byte CHAN, const
 
 	ResponseStatus status;
 	status.code = this->sendStruct((uint8_t *)fixedStransmission, size+3);
-	if (status.code!=SUCCESS) return status;
 
-//	free(fixedStransmission);
+	free(fixedStransmission);
+
+	if (status.code!=SUCCESS) return status;
 
 	return status;
 }
@@ -862,7 +860,7 @@ ResponseContainer LoRa_E32::receiveInitialMessage(uint8_t size){
 		return rc;
 	}
 
-	rc.data = buff; // malloc(sizeof (moduleInformation));
+	rc.data = buff;
 
 	return rc;
 }

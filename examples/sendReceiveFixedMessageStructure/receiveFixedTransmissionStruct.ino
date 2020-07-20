@@ -59,6 +59,7 @@ void setup()
 
 	e32ttl.setConfiguration(configuration, WRITE_CFG_PWR_DWN_SAVE);
 	printParameters(configuration);
+	c.close();
 	// ---------------------------
 	Serial.println();
 	Serial.println("Start listening!");
@@ -82,7 +83,8 @@ void loop()
 
 		Serial.println(*(float*)(message.temperature));
 		Serial.println(message.message);
-		free(rsc.data);
+//		free(rsc.data);
+		rsc.close();
 	}
 }
 

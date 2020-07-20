@@ -34,7 +34,7 @@ void setup() {
 
     e32ttl100.setConfiguration(configuration, WRITE_CFG_PWR_DWN_SAVE);
 	printParameters(configuration);
-
+	c.close();
 	Serial.println("Hi, I'm going to send message!");
 // Send message
 	ResponseStatus rs = e32ttl100.sendMessage("Hello, world?"); // OK The message is received on the other device
