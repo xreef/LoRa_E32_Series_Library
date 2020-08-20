@@ -149,7 +149,7 @@ struct Configuration {
 
 struct ModuleInformation {
 	byte HEAD = 0;
-	byte model = 0;
+	byte frequency = 0;
 	byte version = 0;
 	byte features = 0;
 };

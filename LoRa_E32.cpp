@@ -653,7 +653,7 @@ ResponseStructContainer LoRa_E32::getModuleInformation(){
 	DEBUG_PRINTLN("----------------------------------------");
 	DEBUG_PRINT(F("HEAD BIN INSIDE: "));  DEBUG_PRINT(moduleInformation->HEAD, BIN);DEBUG_PRINT(" ");DEBUG_PRINT(moduleInformation->HEAD, DEC);DEBUG_PRINT(" ");DEBUG_PRINTLN(moduleInformation->HEAD, HEX);
 
-	DEBUG_PRINT(F("Model no.: "));  DEBUG_PRINTLN(moduleInformation->model, HEX);
+	DEBUG_PRINT(F("Freq.: "));  DEBUG_PRINTLN(moduleInformation->frequency, HEX);
 	DEBUG_PRINT(F("Version  : "));  DEBUG_PRINTLN(moduleInformation->version, HEX);
 	DEBUG_PRINT(F("Features : "));  DEBUG_PRINTLN(moduleInformation->features, HEX);
 	DEBUG_PRINTLN("----------------------------------------");

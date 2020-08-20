@@ -108,7 +108,7 @@ void printModuleInformation(struct ModuleInformation moduleInformation) {
 	Serial.println("----------------------------------------");
 	Serial.print(F("HEAD BIN: "));  Serial.print(moduleInformation.HEAD, BIN);Serial.print(" ");Serial.print(moduleInformation.HEAD, DEC);Serial.print(" ");Serial.println(moduleInformation.HEAD, HEX);
 
-	Serial.print(F("Model no.: "));  Serial.println(moduleInformation.model, HEX);
+	Serial.print(F("Freq.: "));  Serial.println(moduleInformation.frequency, HEX);
 	Serial.print(F("Version  : "));  Serial.println(moduleInformation.version, HEX);
 	Serial.print(F("Features : "));  Serial.println(moduleInformation.features, HEX);
 	Serial.println("----------------------------------------");
