@@ -12,6 +12,8 @@
 #
 #
 #
+## Breaking change on ModelInfo
+The attribute model isn't correct, now named frequency
 
 ## Breaking change on esp32 constructor for managed HardwareSerial pins, now reference of HardwareSerial is after the pins to remove ambiguous constructors.
 ```cpp
