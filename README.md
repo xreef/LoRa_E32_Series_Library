@@ -13,7 +13,7 @@
 #
 #
 
-##Breaking change on esp32 constructor for managed HardwareSerial pins, now reference of HardwareSerial is after the pins to remove ambiguous constructors.
+## Breaking change on esp32 constructor for managed HardwareSerial pins, now reference of HardwareSerial is after the pins to remove ambiguous constructors.
 ```cpp
 LoRa_E32(HardwareSerial* serial, byte txE32pin, byte rxE32pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600, uint32_t serialConfig = SERIAL_8N1);
 LoRa_E32(HardwareSerial* serial, byte txE32pin, byte rxE32pin, byte auxPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600, uint32_t serialConfig = SERIAL_8N1);
