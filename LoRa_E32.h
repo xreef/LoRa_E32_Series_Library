@@ -56,10 +56,10 @@
 #define MAX_SIZE_TX_PACKET 58
 
 // Uncomment to enable printing out nice debug messages.
- #define LoRa_E32_DEBUG
+// #define LoRa_E32_DEBUG
 
 // Define where debug output will be printed.
-#define DEBUG_PRINTER Serial
+#define DEBUG_PRINTER Serial1
 
 // Setup debug printing macros.
 #ifdef LoRa_E32_DEBUG

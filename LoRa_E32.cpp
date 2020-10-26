@@ -284,7 +284,7 @@ Status LoRa_E32::waitCompleteResponse(unsigned long timeout, unsigned int waitNo
 	if (this->auxPin != -1) {
 		while (digitalRead(this->auxPin) == LOW) {
 			if ((millis() - t) > timeout){
-				result = ERR_TIMEOUT;
+				result = ERR_E32_TIMEOUT;
 				DEBUG_PRINTLN("Timeout error!");
 				return result;
 			}
@@ -397,7 +397,7 @@ types each handle ints floats differently
 
 Status LoRa_E32::sendStruct(void *structureManaged, uint16_t size_) {
 		if (size_ > MAX_SIZE_TX_PACKET){
-			return ERR_PACKET_TOO_BIG;
+			return ERR_E32_PACKET_TOO_BIG;
 		}
 
 		Status result = SUCCESS;
@@ -409,9 +409,9 @@ Status LoRa_E32::sendStruct(void *structureManaged, uint16_t size_) {
 			DEBUG_PRINT(F(" size:"))
 			DEBUG_PRINT(size_);
 			if (len==0){
-				result = ERR_NO_RESPONSE_FROM_DEVICE;
+				result = ERR_E32_NO_RESPONSE_FROM_DEVICE;
 			}else{
-				result = ERR_DATA_SIZE_NOT_MATCH;
+				result = ERR_E32_DATA_SIZE_NOT_MATCH;
 			}
 		}
 		if (result != SUCCESS) return result;
@@ -453,9 +453,9 @@ Status LoRa_E32::receiveStruct(void *structureManaged, uint16_t size_) {
 
 	if (len!=size_){
 		if (len==0){
-			result = ERR_NO_RESPONSE_FROM_DEVICE;
+			result = ERR_E32_NO_RESPONSE_FROM_DEVICE;
 		}else{
-			result = ERR_DATA_SIZE_NOT_MATCH;
+			result = ERR_E32_DATA_SIZE_NOT_MATCH;
 		}
 	}
 	if (result != SUCCESS) return result;
@@ -507,7 +507,7 @@ Status LoRa_E32::setMode(MODE_TYPE mode) {
 			DEBUG_PRINTLN("MODE PROGRAM/SLEEP!");
 			break;
 		  default:
-			return ERR_INVALID_PARAM;
+			return ERR_E32_INVALID_PARAM;
 		}
 	}
 	// data sheet says 2ms later control is returned, let's give just a bit more time
@@ -570,7 +570,7 @@ ResponseStructContainer LoRa_E32::getConfiguration(){
 //	this->printParameters(*configuration);
 
 	if (0xC0 != ((Configuration *)rc.data)->HEAD && 0xC2 != ((Configuration *)rc.data)->HEAD){
-		rc.status.code = ERR_HEAD_NOT_RECOGNIZED;
+		rc.status.code = ERR_E32_HEAD_NOT_RECOGNIZED;
 	}
 
 //	rc.data = configuration;
@@ -579,7 +579,7 @@ ResponseStructContainer LoRa_E32::getConfiguration(){
 
 RESPONSE_STATUS LoRa_E32::checkUARTConfiguration(MODE_TYPE mode){
 	if (mode==MODE_3_PROGRAM && this->bpsRate!=UART_BPS_RATE_9600){
-		return ERR_WRONG_UART_CONFIG;
+		return ERR_E32_WRONG_UART_CONFIG;
 	}
 	return SUCCESS;
 }
@@ -615,7 +615,7 @@ ResponseStatus LoRa_E32::setConfiguration(Configuration configuration, PROGRAM_C
 //	this->printParameters(*configuration);
 
 	if (0xC0 != configuration.HEAD && 0xC2 != configuration.HEAD){
-		rc.code = ERR_HEAD_NOT_RECOGNIZED;
+		rc.code = ERR_E32_HEAD_NOT_RECOGNIZED;
 	}
 
 	return rc;
@@ -647,7 +647,7 @@ ResponseStructContainer LoRa_E32::getModuleInformation(){
 //	this->printParameters(*configuration);
 
 	if (0xC3 != moduleInformation->HEAD){
-		rc.status.code = ERR_HEAD_NOT_RECOGNIZED;
+		rc.status.code = ERR_E32_HEAD_NOT_RECOGNIZED;
 	}
 
 	DEBUG_PRINTLN("----------------------------------------");
@@ -853,9 +853,9 @@ ResponseContainer LoRa_E32::receiveInitialMessage(uint8_t size){
 	uint8_t len = this->serialDef.stream->readBytes(buff, size);
 	if (len!=size) {
 		if (len==0){
-			rc.status.code = ERR_NO_RESPONSE_FROM_DEVICE;
+			rc.status.code = ERR_E32_NO_RESPONSE_FROM_DEVICE;
 		}else{
-			rc.status.code = ERR_DATA_SIZE_NOT_MATCH;
+			rc.status.code = ERR_E32_DATA_SIZE_NOT_MATCH;
 		}
 		return rc;
 	}
