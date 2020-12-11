@@ -1,7 +1,7 @@
 /*
  * LoRa E32-TTL-100
  * Receive fixed transmission message on channel and wake up.
- * https://www.mischianti.org
+ * https://www.mischianti.org/2020/01/17/lora-e32-device-for-arduino-esp32-or-esp8266-wor-wake-on-radio-microcontroller-and-new-wemos-d1-mini-shield-part-7/
  *
  * E32-TTL-100----- Arduino UNO or esp8266
  * M0         ----- LOW

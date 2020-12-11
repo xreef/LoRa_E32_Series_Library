@@ -1,7 +1,7 @@
 /*
  * LoRa E32-TTL-100
- * Send fixed transmission structured message to a specified point.
- * https://www.mischianti.org
+ * Send fixed broadcast transmission message to a specified channel.
+ * https://www.mischianti.org/2019/11/10/lora-e32-device-for-arduino-esp32-or-esp8266-fixed-transmission-part-4/
  *
  * E32-TTL-100----- Arduino UNO or esp8266
  * M0         ----- 3.3v (To config) GND (To send) 7 (To dinamically manage)
@@ -24,7 +24,7 @@ SoftwareSerial mySerial(D2, D3); // Arduino RX <-- e32 TX, Arduino TX --> e32 RX
 LoRa_E32 e32ttl(&mySerial, D5, D7, D6);
 
 //#include <SoftwareSerial.h>
-//SoftwareSerial mySerial(D2, D3); // Arduino RX <-- e32 TX, Arduino TX --> e32 RX
+//SoftwareSerial mySerial(D2, D3);  // Arduino RX <-- e32 TX, Arduino TX --> e32 RX
 //LoRa_E32 e32ttl(&mySerial, D5, D7, D6);
 // -------------------------------------
 
@@ -49,41 +49,29 @@ void setup()
 	delay(100);
 
 	e32ttl.begin();
+
 	// After set configuration comment set M0 and M1 to low
 	// and reboot if you directly set HIGH M0 and M1 to program
-	ResponseStructContainer c;
-	c = e32ttl.getConfiguration();
-	Configuration configuration = *(Configuration*) c.data;
-	configuration.ADDL = 0x01;
-	configuration.ADDH = 0x00;
-	configuration.CHAN = 0x02;
-	configuration.OPTION.fixedTransmission = FT_FIXED_TRANSMISSION;
-	e32ttl.setConfiguration(configuration, WRITE_CFG_PWR_DWN_SAVE);
-	printParameters(configuration);
-	c.close();
+//	ResponseStructContainer c;
+//	c = e32ttl.getConfiguration();
+//	Configuration configuration = *(Configuration*) c.data;
+//	configuration.ADDL = 0x01;
+//	configuration.ADDH = 0x00;
+//	configuration.CHAN = 0x02;
+//	configuration.OPTION.fixedTransmission = FT_FIXED_TRANSMISSION;
+//	e32ttl.setConfiguration(configuration, WRITE_CFG_PWR_DWN_SAVE);
+//	printParameters(configuration);
+//	c.close();
 	// ---------------------------
 }
-struct Message {
-    char type[5];
-    char message[8];
-    int temperature;
-} message;
 
-int i = 0;
 // The loop function is called in an endless loop
 void loop()
 {
-	delay(2500);
-	i++;
-	struct Message {
-	    char type[5] = "TEMP";
-	    char message[8] = "Kitchen";
-	    byte temperature[4];
-	} message;
+	delay(2000);
 
-	*(float*)(message.temperature) = 19.2;
-
-	ResponseStatus rs = e32ttl.sendFixedMessage(0,3,4,&message, sizeof(Message));
+	Serial.println("Send message to 00 03 04");
+	ResponseStatus rs = e32ttl.sendFixedMessage(0, 3, 0x04, "Message to 00 03 04 device");
 	Serial.println(rs.getResponseDescription());
 }
 

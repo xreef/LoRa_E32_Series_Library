@@ -1,3 +1,19 @@
+/*
+ * LoRa E32-TTL-1W
+ * Send transparent transmission with 1W device
+ * https://www.mischianti.org/2019/10/21/lora-e32-device-for-arduino-esp32-or-esp8266-library-part-2/
+ *
+ * E32-TTL-100----- Arduino UNO or esp8266
+ * M0         ----- 3.3v (To config) GND (To send) 7 (To dinamically manage)
+ * M1         ----- 3.3v (To config) GND (To send) 6 (To dinamically manage)
+ * TX         ----- PIN 2 (PullUP)
+ * RX         ----- PIN 3 (PullUP & Voltage divider)
+ * AUX        ----- Not connected (5 if you connect)
+ * VCC        ----- 3.3v/5v
+ * GND        ----- GND
+ *
+ */
+
 #include "Arduino.h"
 #define E32_TTL_1W
 

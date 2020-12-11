@@ -59,7 +59,7 @@
 // #define LoRa_E32_DEBUG
 
 // Define where debug output will be printed.
-#define DEBUG_PRINTER Serial1
+#define DEBUG_PRINTER Serial
 
 // Setup debug printing macros.
 #ifdef LoRa_E32_DEBUG

@@ -1,7 +1,7 @@
 /*
  * LoRa E32-TTL-100
- * Get configuration.
- * https://www.mischianti.org
+ * Set configuration.
+ * https://www.mischianti.org/2019/10/29/lora-e32-device-for-arduino-esp32-or-esp8266-configuration-part-3/
  *
  * E32-TTL-100----- Arduino UNO
  * M0         ----- 3.3v

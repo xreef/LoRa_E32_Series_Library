@@ -6,6 +6,10 @@
  *
  * Copyright (c) 2019 Renzo Mischianti www.mischianti.org All right reserved.
  *
+ * You may copy, alter and reuse this code in any way you like, but please leave
+ * reference to www.mischianti.org in your comments if you redistribute this code.
+ *
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights

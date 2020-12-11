@@ -12,23 +12,6 @@
 #
 #
 #
-## Breaking change on ModelInfo
-The attribute model isn't correct, now named frequency
-
-## Breaking change on esp32 constructor for managed HardwareSerial pins, now reference of HardwareSerial is after the pins to remove ambiguous constructors.
-```cpp
-LoRa_E32(HardwareSerial* serial, byte txE32pin, byte rxE32pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600, uint32_t serialConfig = SERIAL_8N1);
-LoRa_E32(HardwareSerial* serial, byte txE32pin, byte rxE32pin, byte auxPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600, uint32_t serialConfig = SERIAL_8N1);
-LoRa_E32(HardwareSerial* serial, byte txE32pin, byte rxE32pin, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600, uint32_t serialConfig = SERIAL_8N1);
-```
-now are
-
-```cpp
-LoRa_E32(byte txE32pin, byte rxE32pin, HardwareSerial* serial, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600, uint32_t serialConfig = SERIAL_8N1);
-LoRa_E32(byte txE32pin, byte rxE32pin, HardwareSerial* serial, byte auxPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600, uint32_t serialConfig = SERIAL_8N1);
-LoRa_E32(byte txE32pin, byte rxE32pin, HardwareSerial* serial, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600, uint32_t serialConfig = SERIAL_8N1);
-```
-
 
 # A complete tutorial on my site www.mischianti.org
 
