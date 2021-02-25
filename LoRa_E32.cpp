@@ -400,7 +400,7 @@ types each handle ints floats differently
 */
 
 Status LoRa_E32::sendStruct(void *structureManaged, uint16_t size_) {
-		if (size_ > MAX_SIZE_TX_PACKET){
+		if (size_ > MAX_SIZE_TX_PACKET + 2){
 			return ERR_E32_PACKET_TOO_BIG;
 		}
 
