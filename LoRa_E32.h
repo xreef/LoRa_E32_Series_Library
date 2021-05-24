@@ -34,10 +34,10 @@
 #ifndef LoRa_E32_h
 #define LoRa_E32_h
 
-#ifndef ESP32
+#if !defined(__STM32F1__) && !defined(ESP32)
 	#define ACTIVATE_SOFTWARE_SERIAL
 #endif
-#ifdef ESP32
+#if defined(ESP32)
 	#define HARDWARE_SERIAL_SELECTABLE_PIN
 #endif
 

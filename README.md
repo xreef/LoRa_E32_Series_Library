@@ -25,16 +25,27 @@
 
 
 # An Arduino UNO shield to simplify the use
-![Arduino UNO shield](https://www.mischianti.org/wp-content/uploads/2019/12/ArduinoShieldMountedE32LoRa_min.jpg)
+Arduino UNO shield
 
-You can order the PCB  [here](https://www.pcbway.com/project/shareproject/LoRa_E32_Series_device_Arduino_shield.html) 
+<img width="450px" src="https://www.mischianti.org/wp-content/uploads/2019/12/ArduinoShieldMountedE32LoRa_min.jpg" alt="" class="wp-image-2155"/>
+
+You can order the PCB  [here](https://www.pcbway.com/project/shareproject/LoRa_E32_Series_device_Arduino_shield.html?from=mischianti05) 
 
 Instruction and assembly video on 6 part of the guide
 
 # An WeMos D1 shield to simplify the use
-![Arduino UNO shield](https://www.mischianti.org/wp-content/uploads/2020/01/WeMosD1ShieldMountedE32LoRa_min.jpg)
+WeMos D1 shield
+<img width="450px" src="https://www.mischianti.org/wp-content/uploads/2020/01/WeMosD1ShieldMountedE32LoRa_min.jpg" alt="" class="wp-image-2155"/>
 
-You can order the PCB  [here](https://www.pcbway.com/project/shareproject/LoRa_E32_Series_device_WeMos_D1_mini_shield_RF_8km_range.html) 
+You can order the PCB  [here](https://www.pcbway.com/project/shareproject/LoRa_E32_Series_device_WeMos_D1_mini_shield_RF_8km_range.html?from=mischianti05) 
+
+# An ESP32 shield to simplify the use
+ESP32 shield
+<img width="450px" src="https://www.mischianti.org/wp-content/uploads/2021/04/esp32-DOIT-DEV-KIT-v1-EByte-LoRa-E32-shield-main.jpg" alt="" class="wp-image-2155"/>
+
+You can order the PCB  [here](https://www.pcbway.com/project/shareproject/LoRa_ESP32_DEV_KIT_v1_shield_for_EByte_E32_E22__RF_8km_12km_range.html?from=mischianti05) 
+
+
 
 Instruction and assembly video on 6 part of the guide
 
