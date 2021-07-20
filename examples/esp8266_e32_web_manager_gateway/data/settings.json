@@ -1,0 +1,1 @@
+var settings = {"localRestPort":8080, "localWSPort":8081};
