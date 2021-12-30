@@ -1,5 +1,5 @@
 /*
- * EBYTE LoRa E22 Series
+ * EBYTE LoRa E32 Series
  * https://www.mischianti.org/category/my-libraries/lora-e22-devices/
  *
  * The MIT License (MIT)

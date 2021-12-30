@@ -2,7 +2,7 @@
  * EBYTE LoRa E32 Series
  *
  * AUTHOR:  Renzo Mischianti
- * VERSION: 1.5.2
+ * VERSION: 1.5.3
  *
  * https://www.mischianti.org/category/my-libraries/lora-e32-devices/
  *
