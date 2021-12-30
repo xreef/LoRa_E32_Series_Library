@@ -25,8 +25,8 @@
  * THE SOFTWARE.
  */
 
-#ifndef LORA_E32_LIBRARY_H
-#define LORA_E32_LIBRARY_H
+#ifndef EBYTE_LORA_E32_LIBRARY_H
+#define EBYTE_LORA_E32_LIBRARY_H
 
 #include "LoRa_E32.h"
 
