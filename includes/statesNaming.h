@@ -85,10 +85,10 @@ static String getResponseDescriptionByParams(byte status){
 
 enum UART_PARITY
 {
-  MODE_00_8N1 = B00,
-  MODE_01_8O1 = B01,
-  MODE_10_8E1 = B10,
-  MODE_11_8N1 = B11
+  MODE_00_8N1 = 0b00,
+  MODE_01_8O1 = 0b01,
+  MODE_10_8E1 = 0b10,
+  MODE_11_8N1 = 0b11
 };
 
 static String getUARTParityDescriptionByParams(byte uartParity){
@@ -113,14 +113,14 @@ static String getUARTParityDescriptionByParams(byte uartParity){
 
 enum UART_BPS_TYPE
 {
-  UART_BPS_1200 = B000,
-  UART_BPS_2400 = B001,
-  UART_BPS_4800 = B010,
-  UART_BPS_9600 = B011,
-  UART_BPS_19200 = B100,
-  UART_BPS_38400 = B101,
-  UART_BPS_57600 = B110,
-  UART_BPS_115200 = B111
+  UART_BPS_1200 = 0b000,
+  UART_BPS_2400 = 0b001,
+  UART_BPS_4800 = 0b010,
+  UART_BPS_9600 = 0b011,
+  UART_BPS_19200 = 0b100,
+  UART_BPS_38400 = 0b101,
+  UART_BPS_57600 = 0b110,
+  UART_BPS_115200 = 0b111
 };
 
 enum UART_BPS_RATE
@@ -170,14 +170,14 @@ static String getUARTBaudRateDescriptionByParams(byte uartBaudRate)
 
 enum AIR_DATA_RATE
 {
-  AIR_DATA_RATE_000_03 = B000,
-  AIR_DATA_RATE_001_12 = B001,
-  AIR_DATA_RATE_010_24 = B010,
-  AIR_DATA_RATE_011_48 = B011,
-  AIR_DATA_RATE_100_96 = B100,
-  AIR_DATA_RATE_101_192 = B101,
-  AIR_DATA_RATE_110_192 = B110,
-  AIR_DATA_RATE_111_192 = B111
+  AIR_DATA_RATE_000_03 = 0b000,
+  AIR_DATA_RATE_001_12 = 0b001,
+  AIR_DATA_RATE_010_24 = 0b010,
+  AIR_DATA_RATE_011_48 = 0b011,
+  AIR_DATA_RATE_100_96 = 0b100,
+  AIR_DATA_RATE_101_192 = 0b101,
+  AIR_DATA_RATE_110_192 = 0b110,
+  AIR_DATA_RATE_111_192 = 0b111
 };
 
 
@@ -217,8 +217,8 @@ static String getAirDataRateDescriptionByParams(byte airDataRate)
 
 enum FIDEX_TRANSMISSION
 {
-  FT_TRANSPARENT_TRANSMISSION = B0,
-  FT_FIXED_TRANSMISSION = B1
+  FT_TRANSPARENT_TRANSMISSION = 0b0,
+  FT_FIXED_TRANSMISSION = 0b1
 };
 
 
@@ -240,8 +240,8 @@ static String getFixedTransmissionDescriptionByParams(byte fixedTransmission)
 
 enum IO_DRIVE_MODE
 {
-  IO_D_MODE_OPEN_COLLECTOR = B0,
-  IO_D_MODE_PUSH_PULLS_PULL_UPS = B1
+  IO_D_MODE_OPEN_COLLECTOR = 0b0,
+  IO_D_MODE_PUSH_PULLS_PULL_UPS = 0b1
 };
 
 
@@ -262,14 +262,14 @@ static String getIODriveModeDescriptionDescriptionByParams(byte ioDriveMode)
 
 enum WIRELESS_WAKE_UP_TIME
 {
-  WAKE_UP_250 = B000,
-  WAKE_UP_500 = B001,
-  WAKE_UP_750 = B010,
-  WAKE_UP_1000 = B011,
-  WAKE_UP_1250 = B100,
-  WAKE_UP_1500 = B101,
-  WAKE_UP_1750 = B110,
-  WAKE_UP_2000 = B111
+  WAKE_UP_250 = 0b000,
+  WAKE_UP_500 = 0b001,
+  WAKE_UP_750 = 0b010,
+  WAKE_UP_1000 = 0b011,
+  WAKE_UP_1250 = 0b100,
+  WAKE_UP_1500 = 0b101,
+  WAKE_UP_1750 = 0b110,
+  WAKE_UP_2000 = 0b111
 };
 
 
@@ -307,8 +307,8 @@ static String getWirelessWakeUPTimeDescriptionByParams(byte wirelessWakeUPTime)
 }
 enum FORWARD_ERROR_CORRECTION_SWITCH
 {
-  FEC_0_OFF = B0,
-  FEC_1_ON = B1
+  FEC_0_OFF = 0b0,
+  FEC_1_ON = 0b1
 };
 
 
@@ -330,10 +330,10 @@ static String getFECDescriptionByParams(byte fec)
 #ifdef E32_TTL_100
 	enum TRANSMISSION_POWER
 	{
-	  POWER_20 = B00,
-	  POWER_17 = B01,
-	  POWER_14 = B10,
-	  POWER_10 = B11
+	  POWER_20 = 0b00,
+	  POWER_17 = 0b01,
+	  POWER_14 = 0b10,
+	  POWER_10 = 0b11
 
 	};
 
@@ -360,10 +360,10 @@ static String getFECDescriptionByParams(byte fec)
 #elif defined(E32_TTL_500)
 	enum TRANSMISSION_POWER
 	{
-	  POWER_27 = B00,
-	  POWER_24 = B01,
-	  POWER_21 = B10,
-	  POWER_18 = B11
+	  POWER_27 = 0b00,
+	  POWER_24 = 0b01,
+	  POWER_21 = 0b10,
+	  POWER_18 = 0b11
 
 	};
 
@@ -390,10 +390,10 @@ static String getFECDescriptionByParams(byte fec)
 #elif defined(E32_TTL_1W)
 	enum TRANSMISSION_POWER
 	{
-	  POWER_30 = B00,
-	  POWER_27 = B01,
-	  POWER_24 = B10,
-	  POWER_21 = B11
+	  POWER_30 = 0b00,
+	  POWER_27 = 0b01,
+	  POWER_24 = 0b10,
+	  POWER_21 = 0b11
 
 	};
 
@@ -420,10 +420,10 @@ static String getFECDescriptionByParams(byte fec)
 #else
 	enum TRANSMISSION_POWER
 	{
-	  POWER_20 = B00,
-	  POWER_17 = B01,
-	  POWER_14 = B10,
-	  POWER_10 = B11
+	  POWER_20 = 0b00,
+	  POWER_17 = 0b01,
+	  POWER_14 = 0b10,
+	  POWER_10 = 0b11
 
 	};
 

@@ -205,6 +205,17 @@ LoRa_E32::LoRa_E32(SoftwareSerial* serial, byte auxPin, byte m0Pin, byte m1Pin, 
 #endif
 
 bool LoRa_E32::begin(){
+	DEBUG_PRINT("RX MIC ---> ");
+	DEBUG_PRINTLN(this->txE32pin);
+	DEBUG_PRINT("TX MIC ---> ");
+	DEBUG_PRINTLN(this->rxE32pin);
+	DEBUG_PRINT("AUX ---> ");
+	DEBUG_PRINTLN(this->auxPin);
+	DEBUG_PRINT("M0 ---> ");
+	DEBUG_PRINTLN(this->m0Pin);
+	DEBUG_PRINT("M1 ---> ");
+	DEBUG_PRINTLN(this->m1Pin);
+
 	if (this->auxPin != -1) {
 		pinMode(this->auxPin, INPUT);
 		DEBUG_PRINTLN("Init AUX pin!");
@@ -336,7 +347,7 @@ Method to indicate availability
 
 */
 
-int LoRa_E32::available(unsigned long timeout) {
+int LoRa_E32::available() {
 //	unsigned long t = millis();
 //
 //	// make darn sure millis() is not about to reach max data type limit and start over
@@ -344,7 +355,7 @@ int LoRa_E32::available(unsigned long timeout) {
 //		t = 0;
 //	}
 //
-//	if (this->auxPin != 0) {
+//	if (this->auxPin != -1) {
 //		if (digitalRead(this->auxPin) == HIGH){
 //			return 0;
 //		}else{
@@ -534,7 +545,8 @@ MODE_TYPE LoRa_E32::getMode(){
 
 void LoRa_E32::writeProgramCommand(PROGRAM_COMMAND cmd){
 	  uint8_t CMD[3] = {cmd, cmd, cmd};
-	  uint8_t size = this->serialDef.stream->write(CMD, 3);
+	  // uint8_t size =
+	  this->serialDef.stream->write(CMD, 3);
 	  DEBUG_PRINTLN(size);
 	  this->managedDelay(50);  //need ti check
 }
@@ -792,7 +804,7 @@ ResponseStatus LoRa_E32::sendFixedMessage(byte ADDH, byte ADDL, byte CHAN, const
 	return this->sendFixedMessage(ADDH, ADDL, CHAN, (uint8_t *)messageFixed, size);
 }
 ResponseStatus LoRa_E32::sendBroadcastFixedMessage(byte CHAN, const String message){
-	return this->sendFixedMessage(0xFF, 0xFF, CHAN, message);
+	return this->sendFixedMessage(BROADCAST_ADDRESS, BROADCAST_ADDRESS, CHAN, message);
 }
 
 typedef struct fixedStransmission

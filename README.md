@@ -24,7 +24,8 @@
 7.  [LoRa E32 device for Arduino, esp32 or esp8266: WOR (wake on radio) microcontroller and new WeMos D1 mini shield](https://www.mischianti.org/2020/01/17/lora-e32-device-for-arduino-esp32-or-esp8266-wor-wake-on-radio-microcontroller-and-new-wemos-d1-mini-shield-part-7/)
 
 ## Changelog
- - 31/12/2021 1.5.3 Add support for Arduino SAMD boards
+ - 2021-01-24 1.5.4 Add Arduino Nano BLE support and minor adjustment
+ - 2021-12-31 1.5.3 Add support for Arduino SAMD boards
 
 # An Arduino UNO shield to simplify the use
 Arduino UNO shield
@@ -410,7 +411,8 @@ Type of transmission, pull-up settings, wake-up time, FEC, Transmission power
 
 #### SPED detail
 
-UART Parity bit:  _UART mode can be different between communication parties_
+UART Parity bit:  _UART mode can be different between communication parties
+
 |7|6|UART parity bit|Const value|
 |---|---|---|---|---|
 |0|0|8N1 (default)|MODE_00_8N1|
