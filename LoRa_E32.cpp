@@ -547,7 +547,6 @@ void LoRa_E32::writeProgramCommand(PROGRAM_COMMAND cmd){
 	  uint8_t CMD[3] = {cmd, cmd, cmd};
 	  // uint8_t size =
 	  this->serialDef.stream->write(CMD, 3);
-	  DEBUG_PRINTLN(size);
 	  this->managedDelay(50);  //need ti check
 }
 
