@@ -383,7 +383,7 @@ void resetModule() {
 
 	DynamicJsonDocument doc(512);
 
-	if (rs.code != SUCCESS) {
+	if (rs.code != E32_SUCCESS) {
 	    DEBUG_PRINTLN(F("fail."));
 	    httpRestServer.send(400, F("text/html"), String(rs.getResponseDescription()));
 	}else{
@@ -502,7 +502,7 @@ void postConfiguration() {
             	DEBUG_PRINT(F("==> Set config file END"));
 
 
-            	if (rs.code != SUCCESS) {
+            	if (rs.code != E32_SUCCESS) {
             	    DEBUG_PRINTLN(F("fail."));
             	    httpRestServer.send(400, F("text/html"), String(rs.getResponseDescription()));
             	}else{
@@ -587,7 +587,7 @@ void sendTransparentMessage() {
             	DEBUG_PRINT(F("==> Send message END"));
 
 
-            	if (rs.code != SUCCESS) {
+            	if (rs.code != E32_SUCCESS) {
             	    DEBUG_PRINTLN(F("fail."));
             	    httpRestServer.send(400, F("text/html"), String(rs.getResponseDescription()));
             	}else{
@@ -662,7 +662,7 @@ void sendFixedMessage() {
             	DEBUG_PRINT(F("==> Send message END"));
 
 
-            	if (rs.code != SUCCESS) {
+            	if (rs.code != E32_SUCCESS) {
             	    DEBUG_PRINTLN(F("fail."));
             	    httpRestServer.send(400, F("text/html"), String(rs.getResponseDescription()));
             	}else{
@@ -735,7 +735,7 @@ void sendBroadcastMessage() {
             	DEBUG_PRINT(F("==> Send message END"));
 
 
-            	if (rs.code != SUCCESS) {
+            	if (rs.code != E32_SUCCESS) {
             	    DEBUG_PRINTLN(F("fail."));
             	    httpRestServer.send(400, F("text/html"), String(rs.getResponseDescription()));
             	}else{
