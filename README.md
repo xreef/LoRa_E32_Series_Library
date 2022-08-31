@@ -24,6 +24,7 @@
 7.  [LoRa E32 device for Arduino, esp32 or esp8266: WOR (wake on radio) microcontroller and new WeMos D1 mini shield](https://www.mischianti.org/2020/01/17/lora-e32-device-for-arduino-esp32-or-esp8266-wor-wake-on-radio-microcontroller-and-new-wemos-d1-mini-shield-part-7/)
 
 ## Changelog
+ - 2022-08-31 1.5.7 Minor Fix and examples update
  - 2022-04-07 1.5.6 Fix support for STM32
  - 2022-03-09 1.5.5 Fix UART baudrate variable and debug println
  - 2021-01-24 1.5.4 Add Arduino Nano BLE support and minor adjustment
