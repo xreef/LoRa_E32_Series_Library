@@ -37,6 +37,10 @@ LoRa_E32 e32ttl(&mySerial, D5, D7, D6);
 //LoRa_E32 e32ttl(&mySerial, 5, 7, 6);
 // -------------------------------------
 
+// ---------- Raspberry PI Pico pins --------------
+// LoRa_E220 e220ttl(&Serial2, 2, 10, 11); //  RX AUX M0 M1
+// -------------------------------------
+
 void printParameters(struct Configuration configuration);
 void printModuleInformation(struct ModuleInformation moduleInformation);
 //The setup function is called once at startup of the sketch

@@ -759,6 +759,7 @@ ResponseStatus LoRa_E32::sendMessage(const String message){
 	DEBUG_PRINTLN(size);
 	char messageFixed[size];
 	memcpy(messageFixed,message.c_str(),size);
+	DEBUG_PRINTLN(F(" memcpy "));
 
 	ResponseStatus status;
 	status.code = this->sendStruct((uint8_t *)&messageFixed, size);
