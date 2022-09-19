@@ -34,7 +34,7 @@
 #ifndef LoRa_E32_h
 #define LoRa_E32_h
 
-#if !defined(ARDUINO_ARCH_STM32) && !defined(ESP32) && !defined(ARDUINO_ARCH_SAMD) && !defined(ARDUINO_ARCH_MBED) && !defined(__STM32F1__)
+#if !defined(ARDUINO_ARCH_STM32) && !defined(ESP32) && !defined(ARDUINO_ARCH_SAMD) && !defined(ARDUINO_ARCH_MBED) && !defined(__STM32F1__) && !defined(__STM32F4__)
 	#define ACTIVATE_SOFTWARE_SERIAL
 #endif
 #if defined(ESP32)
