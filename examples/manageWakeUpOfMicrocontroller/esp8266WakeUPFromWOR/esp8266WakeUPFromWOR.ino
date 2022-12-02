@@ -63,6 +63,8 @@ void setup()
 
     e32ttl.setConfiguration(configuration, WRITE_CFG_PWR_DWN_SAVE);
     printParameters(configuration);
+
+    c.close();
     // ---------------------------
     delay(1000);
     Serial.println();
