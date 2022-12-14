@@ -35,7 +35,7 @@ LoRa_E32 e32ttl(2, 3, 4); // Config without connect AUX and M0 M1
 // -------------------------------------
 
 // ---------- Raspberry PI Pico pins --------------
-// LoRa_E220 e220ttl(&Serial2, 2, 10, 11); //  RX AUX M0 M1
+// LoRa_E32 e32ttl100(&Serial2, 2, 10, 11); //  RX AUX M0 M1
 // -------------------------------------
 
 void printParameters(struct Configuration configuration);

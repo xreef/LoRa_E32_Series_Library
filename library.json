@@ -1,6 +1,6 @@
 {
   "name": "EByte LoRa E32 library",
-  "version": "1.5.8",
+  "version": "1.5.9",
   "keywords": "LoRa, UART, EByte, e32, esp32, esp8266, stm32, SAMD, Arduino, Raspberry Pi Pico",
   "description": "Ebyte E32 LoRa (Long Range) library device very cheap and very long range (from 3Km to 8Km). Arduino LoRa EBYTE E32 device library complete and tested with Arduino, esp8266, esp32, STM32 and Raspberry Pi Pico. sx1278/sx1276.",
   "homepage": "https://www.mischianti.org/category/my-libraries/lora-e32-devices/",

@@ -36,6 +36,9 @@ LoRa_E32 e32ttl(&mySerial, D5, D7, D6);
 //SoftwareSerial mySerial(2, 3); // e32 TX e32 RX
 //LoRa_E32 e32ttl(&mySerial, 5, 7, 6);
 // -------------------------------------
+// ---------- Raspberry PI Pico pins --------------
+// LoRa_E32 e32ttl(&Serial2, 2, 10, 11); //  RX AUX M0 M1
+// -------------------------------------
 
 void printParameters(struct Configuration configuration);
 void printModuleInformation(struct ModuleInformation moduleInformation);
