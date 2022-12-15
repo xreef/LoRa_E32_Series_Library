@@ -40,6 +40,11 @@ LoRa_E32 e32ttl(&mySerial, D5, D7, D6);
 // LoRa_E32 e32ttl(&Serial2, 2, 10, 11); //  RX AUX M0 M1
 // -------------------------------------
 
+// ---------------- STM32 --------------------
+// HardwareSerial Serial2(USART2);   // PA3  (RX)  PA2  (TX)
+// LoRa_E32 e32ttl(&Serial2, PA0, PB0, PB10); //  RX AUX M0 M1
+// -------------------------------------------------
+
 void printParameters(struct Configuration configuration);
 void printModuleInformation(struct ModuleInformation moduleInformation);
 //The setup function is called once at startup of the sketch
