@@ -543,11 +543,12 @@ MODE_TYPE LoRa_E32::getMode(){
 	return this->mode;
 }
 
-void LoRa_E32::writeProgramCommand(PROGRAM_COMMAND cmd){
+bool LoRa_E32::writeProgramCommand(PROGRAM_COMMAND cmd){
 	  uint8_t CMD[3] = {cmd, cmd, cmd};
-	  // uint8_t size =
-	  this->serialDef.stream->write(CMD, 3);
+	  uint8_t size = this->serialDef.stream->write(CMD, 3);
 	  this->managedDelay(50);  //need ti check
+
+	  return size!=3;
 }
 
 ResponseStructContainer LoRa_E32::getConfiguration(){

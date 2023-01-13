@@ -311,7 +311,7 @@ class LoRa_E32 {
 
 		Status sendStruct(void *structureManaged, uint16_t size_);
 		Status receiveStruct(void *structureManaged, uint16_t size_);
-        void writeProgramCommand(PROGRAM_COMMAND cmd);
+        bool writeProgramCommand(PROGRAM_COMMAND cmd);
 
 		RESPONSE_STATUS checkUARTConfiguration(MODE_TYPE mode);
 
