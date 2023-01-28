@@ -86,7 +86,7 @@ static String getResponseDescriptionByParams(byte status){
 	}
 }
 
-enum UART_PARITY
+enum E32_UART_PARITY
 {
   MODE_00_8N1 = 0b00,
   MODE_01_8O1 = 0b01,
