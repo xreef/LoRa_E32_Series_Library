@@ -467,7 +467,7 @@ void postConfiguration() {
 
 				configuration.SPED.airDataRate = (AIR_DATA_RATE)(byte)speed[F("airDataRate")];
 				configuration.SPED.uartBaudRate = (UART_BPS_TYPE)(byte)speed[F("uartBaudRate")];
-				configuration.SPED.uartParity = (UART_PARITY)(byte)speed[F("uartParity")];
+				configuration.SPED.uartParity = (E32_UART_PARITY)(byte)speed[F("uartParity")];
 
 
 
