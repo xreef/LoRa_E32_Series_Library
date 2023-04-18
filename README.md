@@ -24,6 +24,7 @@
 7.  [LoRa E32 device for Arduino, esp32 or esp8266: WOR (wake on radio) microcontroller and new WeMos D1 mini shield](https://www.mischianti.org/2020/01/17/lora-e32-device-for-arduino-esp32-or-esp8266-wor-wake-on-radio-microcontroller-and-new-wemos-d1-mini-shield-part-7/)
 
 ## Changelog
+ - 2023-04-18 1.5.11 Distinct frequency from 900MHz and 915Mhz devices [Forum](https://www.mischianti.org/forums/topic/e32-915t-and-e32-900t-modules/)
  - 2022-12-14 1.5.10 Fix UART_PARITY for ESP32 C3 [Forum](https://www.mischianti.org/forums/topic/problems-including-library/) fix
  - 2022-12-14 1.5.9 Raspberry Pi Pico test and examples
  - 2022-09-19 1.5.8 Fix stm32 rogerclerk library #48
