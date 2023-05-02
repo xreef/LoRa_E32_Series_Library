@@ -9,7 +9,7 @@
 #elif defined(FREQUENCY_868)
 	#define OPERATING_FREQUENCY 862
 #elif defined(FREQUENCY_900)
-	#define OPERATING_FREQUENCY 850
+	#define OPERATING_FREQUENCY 862
 #elif defined(FREQUENCY_915)
 	#define OPERATING_FREQUENCY 900
 #else
