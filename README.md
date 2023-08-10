@@ -24,6 +24,7 @@
 7.  [LoRa E32 device for Arduino, esp32 or esp8266: WOR (wake on radio) microcontroller and new WeMos D1 mini shield](https://www.mischianti.org/2020/01/17/lora-e32-device-for-arduino-esp32-or-esp8266-wor-wake-on-radio-microcontroller-and-new-wemos-d1-mini-shield-part-7/)
 
 ## Changelog
+ - 2023-08-10 1.5.13 Add E32_TTL_2W for E32-433T33S [Comment](https://mischianti.org/2019/10/21/lora-e32-device-for-arduino-esp32-or-esp8266-library-part-2/#comment-15851)
  - 2023-05-02 1.5.12 Fix 900Mhz frequency for E32-900T20D and E32-900T30D [Forum](https://www.mischianti.org/forums/topic/e32-915t-and-e32-900t-modules/)
  - 2023-04-18 1.5.11 Distinct frequency from 900MHz and 915Mhz devices [Forum](https://www.mischianti.org/forums/topic/e32-915t-and-e32-900t-modules/)
  - 2022-12-14 1.5.10 Fix UART_PARITY for ESP32 C3 [Forum](https://www.mischianti.org/forums/topic/problems-including-library/) fix

@@ -422,6 +422,36 @@ static String getFECDescriptionByParams(byte fec)
 			return F("Invalid transmission power param");
 		}
 	}
+#elif defined(E32_TTL_2W)
+	enum TRANSMISSION_POWER
+	{
+	  POWER_33 = 0b00,
+	  POWER_30 = 0b01,
+	  POWER_27 = 0b10,
+	  POWER_24 = 0b11
+
+	};
+
+	static String getTransmissionPowerDescriptionByParams(byte transmissionPower)
+	{
+		switch (transmissionPower)
+		{
+		  case POWER_33:
+			return F("33dBm (Default)");
+			break;
+		  case POWER_30:
+			return F("30dBm");
+			break;
+		  case POWER_27:
+			return F("27dBm");
+			break;
+		  case POWER_24:
+			return F("24dBm");
+			break;
+		  default:
+			return F("Invalid transmission power param");
+		}
+	}
 #else
 	enum TRANSMISSION_POWER
 	{
