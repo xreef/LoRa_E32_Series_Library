@@ -97,7 +97,7 @@ Restart the IDE.
 
 #### Pinout
 
-![](https://www.mischianti.org/wp-content/uploads/2019/09/sx1278-sx1276-wireless-lora-uart-module-serial-3000m-arduino-433-rf-robotedu-1705-13-robotedu@101.jpg)
+![](https://mischianti.org/wp-content/uploads/2019/09/ebyte-lora-exx-pinout-1.jpg)
 
 E32 TTL 100
 
@@ -166,7 +166,7 @@ Arduino working voltage is 5v, so we need to add a voltage divider on RX pin M0 
 
 You can use a 2Kohm resistor to GND and 1Kohm from signal than put together on RX.
 
-![](https://www.mischianti.org/wp-content/uploads/2019/10/LoRa_E32-TTL-100_Arduino_VD_PU_FullyConnected_bb-1024x692.jpg)
+![](https://www.mischianti.org/wp-content/uploads/2019/10/LoRa_E32-TTL-100_Arduino_VD_PU_FullyConnected_bb-e1570517268668.jpg)
 
 LoRa E32 TTL 100 Arduino fully connected
 
